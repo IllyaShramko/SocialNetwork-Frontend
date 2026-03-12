@@ -34,6 +34,8 @@ export function HomeHeader(props: HeaderProps) {
                         variant="outline"
                         iconLeft= {<Icons.LogoutIcon />}
                         onPress={() => {
+                            router.push("/login")
+                            setCurrentPage("auth")
                         }}
                     />
                 </View>
