@@ -1,9 +1,10 @@
 import { View, Text } from "react-native";
 
-export default function HomePage() {
+export default function Page() {
+    
     return (
         <View style= {{ flex: 1 }}>
-            <Text>Settings</Text>
+            <Text>Home page</Text>
         </View>
     )
 }

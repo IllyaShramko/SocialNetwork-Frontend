@@ -2,38 +2,37 @@ import { Button, Icons, Images } from "@shared/ui";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./header.styles";
-import { useRouter } from "expo-router";
-import { HeaderProps } from "./header.types";
+import { usePathname, useRouter } from "expo-router";
 import { COLORS } from "@shared/constants/colors";
 
 
-export function HomeHeader(props: HeaderProps) {
-    const {setCurrentPage, currentPage} = props
+export function HomeHeader() {
+    const pathname = usePathname();
+    
     const router = useRouter();
     return (
-        <SafeAreaView edges={["top"]}>
+        <SafeAreaView edges={["top"]} style={{ backgroundColor: COLORS.white }}>
             <View style={styles.header}>
 			    <Images.LogoImage style={styles.logo} />
                 <View style={styles.blockButtons}>
                     <Button 
                         variant="outline"
                         iconLeft= {<Icons.PlusIcon />}
-                        onPress={() => {
-                        }}
+                        onPress={() => {}}
                     />
                     <Button 
                         variant="outline"
                         iconLeft= {<Icons.SettingsIcon />}
                         onPress={() => {
                             router.push("/settings")
-                            setCurrentPage("settings")
                         }}
-                        style={currentPage === "settings" && { backgroundColor: COLORS.plum50 }}
+                        style={pathname === "/settings" && { backgroundColor: COLORS.plum50 }}
                     />
                     <Button 
                         variant="outline"
                         iconLeft= {<Icons.LogoutIcon />}
                         onPress={() => {
+                            router.push("/login")
                         }}
                     />
                 </View>
