@@ -7,7 +7,6 @@ export const COLORS = {
     plum50: "#E9E5EE",
     white: "#FFFFFF",
     fog: "#FAF8FF",
-    green: "",
-    red: "",
-    
+    green: "#22C55E",
+    red: "#FF4C4C",
 }

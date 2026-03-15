@@ -1,10 +1,10 @@
 import { HomeHeader } from "@modules/layout";
 import { COLORS } from "@shared/constants/colors";
 import { FONT_SIZE } from "@shared/constants/font-size";
+import { typography } from "@shared/theme";
 import { Icons } from "@shared/ui";
 import { Tabs } from "expo-router";
-import { StyleSheet, View } from "react-native";
-
+import { StyleSheet, Text, View } from "react-native";
 
 export default function MainLayout() {
 
@@ -16,8 +16,9 @@ export default function MainLayout() {
             tabBarInactiveTintColor: '#0D0D12',
             tabBarStyle: styles.footer,
             tabBarLabelStyle: {
-                fontSize: 14,
-                fontWeight: 500,
+                fontSize: FONT_SIZE.defaultP,
+                color: COLORS.blue,
+                fontFamily: typography.medium.fontFamily
             },
         }}>
             <Tabs.Screen
@@ -30,7 +31,6 @@ export default function MainLayout() {
                             <Icons.HomeIcon />
                         </View>
                     ),
-                    tabBarLabelStyle: styles.text
                 }}
             />
             <Tabs.Screen
@@ -44,10 +44,9 @@ export default function MainLayout() {
                         </View>
                     ),
                     tabBarItemStyle: {
-                        flex: 1.2,
+                        flex: 1.3,
                         width: "auto"
                     },
-                    tabBarLabelStyle: styles.text
                 }}
             />
             <Tabs.Screen
@@ -60,7 +59,6 @@ export default function MainLayout() {
                             <Icons.FriendsIcon />
                         </View>
                     ),
-                    tabBarLabelStyle: styles.text
                 }}
             />
             <Tabs.Screen
@@ -73,7 +71,6 @@ export default function MainLayout() {
                             <Icons.ChatsIcon />
                         </View>
                     ),
-                    tabBarLabelStyle: styles.text
                 }}
             />
             <Tabs.Screen
@@ -98,14 +95,9 @@ export const styles = StyleSheet.create({
         paddingBottom: 4,
         alignItems: "center"
     },
-    text: {
-        fontSize: FONT_SIZE.defaultP,
-        fontWeight: 500,
-        color: COLORS.blue
-    },
     selected: {
         position: "absolute",
-        top: 0,
+        top: -3.5,
         width: "500%",
         height: 2,
         backgroundColor: COLORS.blue

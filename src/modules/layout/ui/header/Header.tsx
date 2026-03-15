@@ -15,19 +15,21 @@ export function HomeHeader() {
             <View style={styles.header}>
 			    <Images.LogoImage style={styles.logo} />
                 <View style={styles.blockButtons}>
-                    <Button 
+                    {!pathname.includes("/friends") && <Button 
                         variant="outline"
                         iconLeft= {<Icons.PlusIcon />}
                         onPress={() => {}}
-                    />
-                    <Button 
+                    />}
+
+                    {!pathname.includes("/chats") && <Button 
                         variant="outline"
                         iconLeft= {<Icons.SettingsIcon />}
                         onPress={() => {
                             router.push("/settings")
                         }}
-                        style={pathname === "/settings" && { backgroundColor: COLORS.plum50 }}
-                    />
+                        style={pathname.includes("/settings") && { backgroundColor: COLORS.plum50 }}
+                    />}
+                    
                     <Button 
                         variant="outline"
                         iconLeft= {<Icons.LogoutIcon />}
