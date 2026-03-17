@@ -1,4 +1,3 @@
-import { COLORS } from "@shared/constants/colors";
 import { useFonts } from "expo-font";
 import { Slot, SplashScreen } from "expo-router";
 import { useEffect } from "react";
@@ -30,7 +29,7 @@ export default function RootLayout() {
     }
 
     return (
-        <SafeAreaProvider style= {{ backgroundColor: COLORS.plum50 }}>
+        <SafeAreaProvider>
             <Slot />
         </SafeAreaProvider>
     )

@@ -4,7 +4,7 @@ export default function Page() {
     
     return (
         <View style= {{ flex: 1 }}>
-            <Text>Home page</Text>
+            <Text>Головна</Text>
         </View>
     )
 }

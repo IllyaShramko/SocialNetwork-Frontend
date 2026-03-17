@@ -1,4 +1,6 @@
 import { COLORS } from "@shared/constants/colors";
+import { FONT_SIZE } from "@shared/constants/font-size";
+import { typography } from "@shared/theme";
 import { StyleSheet } from "react-native";
 
 
@@ -26,7 +28,8 @@ export const styles = StyleSheet.create({
         borderRightColor: COLORS.plum,
     },
     text: {
-        fontSize: 14,
+        fontFamily: typography.medium.fontFamily,
+        fontSize: FONT_SIZE.defaultP,
     },
     textFill: {
         color: COLORS.white

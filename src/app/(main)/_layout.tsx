@@ -9,77 +9,81 @@ import { StyleSheet, Text, View } from "react-native";
 export default function MainLayout() {
 
     return (
-        <Tabs screenOptions={{ 
-            header: () => <HomeHeader />,
-            tabBarShowLabel: true,
-            tabBarActiveTintColor: '#0D0D12', 
-            tabBarInactiveTintColor: '#0D0D12',
-            tabBarStyle: styles.footer,
-            tabBarLabelStyle: {
-                fontSize: FONT_SIZE.defaultP,
-                color: COLORS.blue,
-                fontFamily: typography.medium.fontFamily
-            },
-        }}>
-            <Tabs.Screen
-                name="index"
-                options={{
-                    title: 'Головна',
-                    tabBarIcon: ({ focused }) => (
-                        <View style={styles.link}>
-                            {focused && <View style={styles.selected} />}
-                            <Icons.HomeIcon />
-                        </View>
-                    ),
-                }}
-            />
-            <Tabs.Screen
-                name="my-publishs"
-                options={{
-                    title: 'Мої публікації',
-                    tabBarIcon: ({ focused }) => (
-                        <View style={styles.link}>
-                            {focused && <View style={styles.selected} />}
-                            <Icons.GalaryIcon />
-                        </View>
-                    ),
-                    tabBarItemStyle: {
-                        flex: 1.3,
-                        width: "auto"
-                    },
-                }}
-            />
-            <Tabs.Screen
-                name="friends/index"
-                options={{
-                    title: 'Друзі',
-                    tabBarIcon: ({ focused }) => (
-                        <View style={styles.link}>
-                            {focused && <View style={styles.selected} />}
-                            <Icons.FriendsIcon />
-                        </View>
-                    ),
-                }}
-            />
-            <Tabs.Screen
-                name="chats/index"
-                options={{
-                    title: 'Чати',
-                    tabBarIcon: ({ focused }) => (
-                        <View style={styles.link}>
-                            {focused && <View style={styles.selected} />}
-                            <Icons.ChatsIcon />
-                        </View>
-                    ),
-                }}
-            />
-            <Tabs.Screen
-                name="settings"
-                options={{
-                    href: null,
-                }}
-            />
-        </Tabs>
+        <View style={{ flex: 1 }}>
+            <HomeHeader />
+            <Tabs screenOptions={{ 
+                headerShown: false,
+                tabBarShowLabel: true,
+                tabBarActiveTintColor: '#0D0D12', 
+                tabBarInactiveTintColor: '#0D0D12',
+                tabBarStyle: styles.footer,
+                tabBarLabelStyle: {
+                    fontSize: FONT_SIZE.defaultP,
+                    color: COLORS.blue,
+                    fontFamily: typography.medium.fontFamily
+                },
+                sceneStyle: { backgroundColor: COLORS.fog }
+            }}>
+                <Tabs.Screen
+                    name="index"
+                    options={{
+                        title: 'Головна',
+                        tabBarIcon: ({ focused }) => (
+                            <View style={styles.link}>
+                                {focused && <View style={styles.selected} />}
+                                <Icons.HomeIcon />
+                            </View>
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="my-publishs"
+                    options={{
+                        title: 'Мої публікації',
+                        tabBarIcon: ({ focused }) => (
+                            <View style={styles.link}>
+                                {focused && <View style={styles.selected} />}
+                                <Icons.GalaryIcon />
+                            </View>
+                        ),
+                        tabBarItemStyle: {
+                            flex: 1.5,
+                            width: "auto"
+                        },
+                    }}
+                />
+                <Tabs.Screen
+                    name="friends"
+                    options={{
+                        title: 'Друзі',
+                        tabBarIcon: ({ focused }) => (
+                            <View style={styles.link}>
+                                {focused && <View style={styles.selected} />}
+                                <Icons.FriendsIcon />
+                            </View>
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="chats"
+                    options={{
+                        title: 'Чати',
+                        tabBarIcon: ({ focused }) => (
+                            <View style={styles.link}>
+                                {focused && <View style={styles.selected} />}
+                                <Icons.ChatsIcon />
+                            </View>
+                        ),
+                    }}
+                />
+                <Tabs.Screen
+                    name="settings"
+                    options={{
+                        href: null,
+                    }}
+                />
+            </Tabs>
+        </View>
     )
 }
 export const styles = StyleSheet.create({
