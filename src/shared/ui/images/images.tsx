@@ -1,6 +1,5 @@
-import { LogoImage } from "./_images/Logo"
-
+import { LogoImage } from "./_images/Logo";
 
 export const Images = {
-    LogoImage
-}
+	LogoImage,
+};

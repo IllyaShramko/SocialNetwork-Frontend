@@ -1,2 +1,2 @@
-export { HomeHeader } from "./header"
-export { SubHeader } from "./subHeader"
+export { HomeHeader } from "./header";
+export { SubHeader } from "./subHeader";

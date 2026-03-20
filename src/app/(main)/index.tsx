@@ -1,10 +1,9 @@
 import { View, Text } from "react-native";
 
 export default function Page() {
-    
-    return (
-        <View style= {{ flex: 1 }}>
-            <Text>Головна</Text>
-        </View>
-    )
+	return (
+		<View style={{ flex: 1 }}>
+			<Text>Головна</Text>
+		</View>
+	);
 }

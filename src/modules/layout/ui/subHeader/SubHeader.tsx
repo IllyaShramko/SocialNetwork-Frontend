@@ -1,14 +1,7 @@
-import { SubLink } from "@shared/ui";
 import { View } from "react-native";
-import { styles } from "./subHeader.styles"
-import { usePathname, useRouter } from "expo-router";
+import { styles } from "./subHeader.styles";
 import { PropsWithChildren } from "react";
 
-
 export function SubHeader({ children }: PropsWithChildren) {
-    return (
-        <View style={styles.header}>
-            {children}
-        </View>
-    )
+	return <View style={styles.header}>{children}</View>;
 }

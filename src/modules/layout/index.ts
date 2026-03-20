@@ -1,1 +1,1 @@
-export { HomeHeader, SubHeader } from "./ui"
+export { HomeHeader, SubHeader } from "./ui";

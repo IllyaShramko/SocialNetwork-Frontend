@@ -1,1 +1,1 @@
-export { SubLink } from "./SubLink"
+export { SubLink } from "./SubLink";

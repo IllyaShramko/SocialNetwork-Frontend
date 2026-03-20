@@ -1,9 +1,13 @@
 # Social Messanger | Соціальна Мережа
+
 ![](./assets/readme/cover.png)
 
 ## Навігація:
+
 - Навігація
+
 ## Технології:
+
 - react-native
 - expo
     - expo-image

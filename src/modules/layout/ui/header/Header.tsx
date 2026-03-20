@@ -5,40 +5,47 @@ import { styles } from "./header.styles";
 import { usePathname, useRouter } from "expo-router";
 import { COLORS } from "@shared/constants/colors";
 
-
 export function HomeHeader() {
-    const pathname = usePathname();
-    
-    const router = useRouter();
-    return (
-        <SafeAreaView edges={["top"]} style={{ backgroundColor: COLORS.white }}>
-            <View style={styles.header}>
-			    <Images.LogoImage style={styles.logo} />
-                <View style={styles.blockButtons}>
-                    {!pathname.includes("/friends") && <Button 
-                        variant="outline"
-                        iconLeft= {<Icons.PlusIcon />}
-                        onPress={() => {}}
-                    />}
+	const pathname = usePathname();
 
-                    {!pathname.includes("/chats") && <Button 
-                        variant="outline"
-                        iconLeft= {<Icons.SettingsIcon />}
-                        onPress={() => {
-                            router.push("/settings")
-                        }}
-                        style={pathname.includes("/settings") && { backgroundColor: COLORS.plum50 }}
-                    />}
-                    
-                    <Button 
-                        variant="outline"
-                        iconLeft= {<Icons.LogoutIcon />}
-                        onPress={() => {
-                            router.push("/login")
-                        }}
-                    />
-                </View>
-            </View>
-        </SafeAreaView>
-    )
+	const router = useRouter();
+	return (
+		<SafeAreaView edges={["top"]} style={{ backgroundColor: COLORS.white }}>
+			<View style={styles.header}>
+				<Images.LogoImage style={styles.logo} />
+				<View style={styles.blockButtons}>
+					{!pathname.includes("/friends") && (
+						<Button
+							variant="outline"
+							iconLeft={<Icons.PlusIcon />}
+							onPress={() => {}}
+						/>
+					)}
+
+					{!pathname.includes("/chats") && (
+						<Button
+							variant="outline"
+							iconLeft={<Icons.SettingsIcon />}
+							onPress={() => {
+								router.push("/settings");
+							}}
+							style={
+								pathname.includes("/settings") && {
+									backgroundColor: COLORS.plum50,
+								}
+							}
+						/>
+					)}
+
+					<Button
+						variant="outline"
+						iconLeft={<Icons.LogoutIcon />}
+						onPress={() => {
+							router.push("/login");
+						}}
+					/>
+				</View>
+			</View>
+		</SafeAreaView>
+	);
 }

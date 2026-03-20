@@ -6,31 +6,30 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 SplashScreen.preventAutoHideAsync(); // Set loading screen while loading fonts
 
 export default function RootLayout() {
+	const [loaded, error] = useFonts({
+		"GTWalsheim-Black": require("../assets/fonts/GTWalsheimPro-Black.ttf"),
+		"GTWalsheim-Bold": require("../assets/fonts/GTWalsheimPro-Bold.ttf"),
+		"GTWalsheim-Medium": require("../assets/fonts/GTWalsheimPro-Medium.ttf"),
+		"GTWalsheim-Regular": require("../assets/fonts/GTWalsheimPro-Regular.ttf"),
+	});
 
-    const [loaded, error] = useFonts({
-        'GTWalsheim-Black': require('../assets/fonts/GTWalsheimPro-Black.ttf'),
-        'GTWalsheim-Bold': require('../assets/fonts/GTWalsheimPro-Bold.ttf'),
-        'GTWalsheim-Medium': require('../assets/fonts/GTWalsheimPro-Medium.ttf'),
-        'GTWalsheim-Regular': require('../assets/fonts/GTWalsheimPro-Regular.ttf'),
-    });
+	useEffect(() => {
+		if (error) throw error;
+	}, [error]);
 
-    useEffect(() => {
-        if (error) throw error;
-    }, [error]);
+	useEffect(() => {
+		if (loaded) {
+			SplashScreen.hideAsync();
+		}
+	}, [loaded]);
 
-    useEffect(() => {
-        if (loaded) {
-            SplashScreen.hideAsync();
-        }
-    }, [loaded]);
+	if (!loaded && !error) {
+		return null;
+	}
 
-    if (!loaded && !error) {
-        return null;
-    }
-
-    return (
-        <SafeAreaProvider>
-            <Slot />
-        </SafeAreaProvider>
-    )
+	return (
+		<SafeAreaProvider>
+			<Slot />
+		</SafeAreaProvider>
+	);
 }
