@@ -3,14 +3,14 @@ import { SubLinkProps } from "./subLink.types";
 import { styles } from "./subLink.styles";
 
 export function SubLink(props: SubLinkProps) {
-	const { text, active, style, ...restProps } = props;
+	const { text, active, style, textStyle, ...restProps } = props;
 
 	return (
 		<TouchableOpacity
 			style={[styles.subLink, style, !active && styles.disabled]}
 			{...restProps}
 		>
-			<Text style={[styles.text, !active && styles.disabledText]}>
+			<Text style={[styles.text, textStyle, !active && styles.disabledText]}>
 				{text}
 			</Text>
 			<View

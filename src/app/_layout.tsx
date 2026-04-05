@@ -1,6 +1,9 @@
+import { COLORS } from "@shared/constants/colors";
 import { useFonts } from "expo-font";
 import { Slot, SplashScreen } from "expo-router";
 import { useEffect } from "react";
+import { View } from "react-native";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync(); // Set loading screen while loading fonts
@@ -29,7 +32,9 @@ export default function RootLayout() {
 
 	return (
 		<SafeAreaProvider>
-			<Slot />
+			<KeyboardProvider>
+				<Slot />
+			</KeyboardProvider>
 		</SafeAreaProvider>
 	);
 }

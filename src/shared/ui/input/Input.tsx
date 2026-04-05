@@ -37,11 +37,12 @@ export function Input(props: InputProps) {
 					styles.inputContainer,
 					!isActive && styles.inputNotActive,
 					!accessable && styles.inputNotAllowed,
+					error && styles.inputError,
 				]}
 			>
 				{iconLeft}
 				<TextInput
-					style={[styles.input, error && styles.inputError]}
+					style={styles.input}
 					onFocus={(e) => {
 						setIsActive(true);
 						if (onFocus) onFocus(e);
