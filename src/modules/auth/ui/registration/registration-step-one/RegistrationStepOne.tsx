@@ -1,17 +1,18 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Text, View } from "react-native";
-import { styles } from "./registraion.styles";
+import { styles } from "./registration.styles";
 import { Button, Icons, Input, SubLink } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
-import { registerValidator } from "../../../models/validators/register.validation";
-import { type RegForm } from "../../../models/types/registration.types";
+import { registerValidators } from "../../../models/validators/register.validation";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { useGenerateCodeMutation } from "@modules/auth/api";
+import { RegFormStepOne } from "@modules/auth/models/types/registration.types";
 
 export function RegistrationStepOne() {
-	const { handleSubmit, control } = useForm<RegForm>({
-		resolver: yupResolver(registerValidator),
+	const { handleSubmit, control } = useForm<RegFormStepOne>({
+		resolver: yupResolver(registerValidators.stepOne),
 		mode: "onChange",
 		defaultValues: {
 			email: "",
@@ -20,18 +21,34 @@ export function RegistrationStepOne() {
 		},
 	});
 	const router = useRouter();
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [generateCode, { isLoading: isGeneratingCode, error: generateCodeError }] = useGenerateCodeMutation()
+	const [errorMessageEmail, setErrorMessageEmail] = useState<string>("");
 
-	function onSubmit(data: RegForm) {
-		setIsLoading(true);
-		// router.push({
-		// 	pathname: "/register/step-two",
-		// 	params: data,
-		// });
+	async function onSubmit(data: RegFormStepOne) {
+		console.log(data);
+		try {
+			const codeGenerateReponse = await generateCode({
+				email: data.email,
+			}).unwrap();
+			if (codeGenerateReponse.message === "ALREADY_EXISTS") {
+				setErrorMessageEmail("Користувач з такою поштою вже існує");
+				return;
+			}
+			if (codeGenerateReponse.message === "INTERNAL_ERROR") {
+				setErrorMessageEmail("Помилка при надсиланні коду підтвердження");
+				return;
+			}
+			router.push({
+				pathname: "/register/step-two",
+				params: { email: data.email, password: data.password },
+			});
+		} catch (error) {
+			console.log(error)
+			return
+		}
 	}
 	return (
 		<KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
-
 			<View style={styles.container}>
 				<View style={styles.nav}>
 					<SubLink
@@ -49,7 +66,9 @@ export function RegistrationStepOne() {
 					/>
 				</View>
 				<View>
-					<Text style={styles.welcomeText}>Приєднуйся до World IT</Text>
+					<Text style={styles.welcomeText}>
+						Приєднуйся до World IT
+					</Text>
 				</View>
 				<View style={styles.inputs}>
 					<Controller
@@ -66,8 +85,8 @@ export function RegistrationStepOne() {
 									onChangeText={field.onChange}
 									value={field.value}
 									label="Електронна пошта"
-									error={fieldState.error?.message}
-									accessable={!isLoading}
+									error={fieldState.error?.message || errorMessageEmail}
+									accessable={!isGeneratingCode}
 								/>
 							);
 						}}
@@ -87,7 +106,7 @@ export function RegistrationStepOne() {
 									value={field.value}
 									label="Пароль"
 									error={fieldState.error?.message}
-									accessable={!isLoading}
+									accessable={!isGeneratingCode}
 								/>
 							);
 						}}
@@ -107,7 +126,7 @@ export function RegistrationStepOne() {
 									onChangeText={field.onChange}
 									value={field.value}
 									error={fieldState.error?.message}
-									accessable={!isLoading}
+									accessable={!isGeneratingCode}
 								/>
 							);
 						}}
@@ -116,9 +135,11 @@ export function RegistrationStepOne() {
 				<View>
 					<Button
 						variant="fill"
-						text={isLoading ? "Надсилаємо код..." : "Створити акаунт"}
+						text={
+							isGeneratingCode ? "Надсилаємо код..." : "Створити акаунт"
+						}
 						onPress={handleSubmit(onSubmit)}
-						disabled={isLoading}
+						disabled={isGeneratingCode}
 						style={{ paddingHorizontal: 24, paddingVertical: 16 }}
 					/>
 				</View>

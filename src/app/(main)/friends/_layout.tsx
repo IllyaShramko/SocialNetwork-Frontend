@@ -8,7 +8,7 @@ export default function SettingsLayout() {
 	const pathname = usePathname();
 	const router = useRouter();
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, backgroundColor: COLORS.plum50 }}>
 			<SubHeader>
 				<SubLink
 					text="Головна"

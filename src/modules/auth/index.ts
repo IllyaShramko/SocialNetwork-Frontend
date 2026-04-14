@@ -1,1 +1,6 @@
-export { AuthHeader, RegistrationStepOne, LoginForm } from "./ui";
+export {
+	AuthHeader,
+	RegistrationStepOne,
+	LoginForm,
+	RegistrationStepTwo,
+} from "./ui";

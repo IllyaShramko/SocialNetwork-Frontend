@@ -1,9 +1,11 @@
-import { View, Text } from "react-native";
+import { RegistrationStepTwo } from "@modules/auth";
+import { COLORS } from "@shared/constants/colors";
+import { View } from "react-native";
 
 export default function Page() {
 	return (
-		<View style={{ flex: 1 }}>
-			<Text>Register</Text>
+		<View style={{ backgroundColor: COLORS.plum50, flex: 1 }}>
+			<RegistrationStepTwo />
 		</View>
 	);
 }

@@ -1,6 +1,10 @@
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
-import { styles } from "./input.styles";
-import { InputPasswordProps, InputProps } from "./input.types";
+import { styles, stylesInputCodeNumber } from "./input.styles";
+import {
+	InputCodeNumberProps,
+	InputPasswordProps,
+	InputProps,
+} from "./input.types";
 import { useState } from "react";
 import { Icons } from "../icons";
 import { COLORS } from "@shared/constants/colors";
@@ -42,7 +46,7 @@ export function Input(props: InputProps) {
 			>
 				{iconLeft}
 				<TextInput
-					style={styles.input}
+					style={[styles.input, !accessable && styles.textNotAllowed]}
 					onFocus={(e) => {
 						setIsActive(true);
 						if (onFocus) onFocus(e);
@@ -51,6 +55,7 @@ export function Input(props: InputProps) {
 						setIsActive(false);
 						if (onBlur) onBlur(e);
 					}}
+					editable={accessable}
 					{...restProps}
 				/>
 				{iconRight}
@@ -92,3 +97,67 @@ function Password(props: InputPasswordProps) {
 	);
 }
 Input.Password = Password;
+
+function CodeNumber(props: InputCodeNumberProps) {
+	const {
+		accessable,
+		isError,
+		onBlur,
+		onFocus,
+		onNextField,
+		onBackspace,
+		onChangeText,
+		...restProps
+	} = props;
+	const [isActive, setIsActive] = useState<boolean>(false);
+
+	const handleChangeText = (value: string) => {
+		if (onChangeText) {
+			onChangeText(value);
+		}
+		if (value.length === 1 && onNextField) {
+			onNextField();
+		}
+	};
+
+	const handleKeyPress = ({
+		nativeEvent,
+	}: {
+		nativeEvent: { key: string };
+	}) => {
+		if (nativeEvent.key === "Backspace" && onBackspace) {
+			onBackspace();
+		}
+	};
+
+	return (
+		<View
+			style={[
+				styles.container,
+				stylesInputCodeNumber.inputContainer,
+				!isActive && styles.inputNotActive,
+				!accessable && styles.inputNotAllowed,
+				isError && styles.inputError,
+			]}
+		>
+			<TextInput
+				{...restProps}
+				style={stylesInputCodeNumber.input}
+				onFocus={(e) => {
+					setIsActive(true);
+					if (onFocus) onFocus(e);
+				}}
+				onBlur={(e) => {
+					setIsActive(false);
+					if (onBlur) onBlur(e);
+				}}
+				editable={accessable}
+				onKeyPress={handleKeyPress}
+				onChangeText={handleChangeText}
+				maxLength={1}
+			/>
+		</View>
+	);
+}
+
+Input.CodeNumber = CodeNumber;

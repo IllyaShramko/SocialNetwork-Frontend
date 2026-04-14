@@ -19,7 +19,10 @@ export const styles = StyleSheet.create({
 		borderRadius: 10,
 	},
 	inputNotActive: {
-		borderColor: COLORS.blue20,
+		borderColor: COLORS.blue50,
+	},
+	textNotAllowed: {
+		color: COLORS.blue50
 	},
 	labelNotAllowed: {
 		color: COLORS.blue50,
@@ -36,7 +39,7 @@ export const styles = StyleSheet.create({
 		color: COLORS.blue,
 	},
 	inputNotAllowed: {
-		borderColor: COLORS.blue50,
+		borderColor: COLORS.blue20,
 	},
 	inputError: {
 		borderColor: COLORS.red,
@@ -45,5 +48,32 @@ export const styles = StyleSheet.create({
 		fontSize: 12,
 		fontFamily: typography.regular.fontFamily,
 		color: COLORS.red,
+	},
+});
+
+export const stylesInputCodeNumber = StyleSheet.create({
+	inputContainer: {
+		width: 40,
+		height: 40,
+		paddingHorizontal: 0,
+		justifyContent: "center",
+		borderWidth: 1,
+		borderRadius: 10,
+	},
+	input: {
+		textAlign: "center",
+		width: "100%",
+		fontSize: 16,
+		fontFamily: typography.regular.fontFamily,
+		color: COLORS.blue,
+	},
+	inputNotActive: {
+		borderColor: COLORS.blue20,
+	},
+	inputNotAllowed: {
+		borderColor: COLORS.blue50,
+	},
+	inputError: {
+		borderColor: COLORS.red,
 	},
 });

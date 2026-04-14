@@ -8,6 +8,8 @@ import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { LoginFormT } from "@modules/auth/models/types/login.types";
 import { loginValidator } from "@modules/auth/models/validators/login.validation";
+import { useLoginMutation } from "@modules/auth/api";
+import { useUserContext } from "@modules/auth/context/user.context";
 
 export function LoginForm() {
 	const { handleSubmit, control } = useForm<LoginFormT>({
@@ -19,14 +21,18 @@ export function LoginForm() {
 		},
 	});
 	const router = useRouter();
-	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [login, { isLoading, error }] = useLoginMutation();
+	const { setToken } = useUserContext()
 
-	function onSubmit(data: LoginFormT) {
-		setIsLoading(true);
-		// router.push({
-		// 	pathname: "/register/step-two",
-		// 	params: data,
-		// });
+	async function onSubmit(data: LoginFormT) {
+		try {
+			const response = await login(data).unwrap();
+			setToken(response.token);
+			console.log(response.token);
+			router.replace("/")
+		} catch (error) {
+			console.log(error);
+		}
 	}
 	return (
 		<KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>

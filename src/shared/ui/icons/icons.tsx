@@ -1,4 +1,7 @@
 import { ChatsIcon } from "./_icons/Chats";
+import { CheckBoxIcon } from "./_icons/CheckBox";
+import { CloseIcon } from "./_icons/Close";
+import { EditIcon } from "./_icons/Edit";
 import { EyeClosedIcon } from "./_icons/EyeClosed";
 import { EyeOpenedIcon } from "./_icons/EyeOpened";
 import { FriendsIcon } from "./_icons/Friends";
@@ -18,4 +21,7 @@ export const Icons = {
 	HomeIcon,
 	EyeClosedIcon,
 	EyeOpenedIcon,
+	EditIcon,
+	CheckBoxIcon,
+	CloseIcon,
 };

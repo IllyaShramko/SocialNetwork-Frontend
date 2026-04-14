@@ -1,4 +1,5 @@
 import { InferType } from "yup";
-import { registerValidator } from "../validators/register.validation";
+import { registerValidators } from "../validators/register.validation";
 
-export type RegForm = InferType<typeof registerValidator>;
+export type RegFormStepOne = InferType<typeof registerValidators.stepOne>;
+export type RegFormStepTwo = InferType<typeof registerValidators.stepTwo>;

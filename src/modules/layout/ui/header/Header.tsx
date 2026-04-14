@@ -4,8 +4,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./header.styles";
 import { usePathname, useRouter } from "expo-router";
 import { COLORS } from "@shared/constants/colors";
+import { useUserContext } from "@modules/auth/context/user.context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function HomeHeader() {
+	const { setToken, setUser } = useUserContext();
 	const pathname = usePathname();
 
 	const router = useRouter();
@@ -41,7 +44,10 @@ export function HomeHeader() {
 						variant="outline"
 						iconLeft={<Icons.LogoutIcon />}
 						onPress={() => {
-							router.push("/login");
+							setToken("");
+							setUser(null);
+							AsyncStorage.removeItem("token");
+							router.replace("/login");
 						}}
 					/>
 				</View>
