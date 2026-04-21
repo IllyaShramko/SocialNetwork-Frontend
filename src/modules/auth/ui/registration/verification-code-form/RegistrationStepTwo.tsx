@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Text, TouchableOpacity, View, TextInput } from "react-native";
 import { styles } from "./registration.styles";
-import { Button, Icons, Input, SubLink } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
 import { registerValidators } from "../../../models/validators/register.validation";
 import { RegFormStepTwo } from "../../../models/types/registration.types";
@@ -13,6 +12,8 @@ import {
 	useRegisterMutation,
 	useValidateCodeMutation,
 } from "@modules/auth/api";
+import { Input } from "@shared/ui/input";
+import { Button } from "@shared/ui/button";
 
 export function RegistrationStepTwo() {
 	const { setToken } = useUserContext();
@@ -87,7 +88,10 @@ export function RegistrationStepTwo() {
 				return;
 			}
 			setToken(registerResponse.token);
-			router.replace("/");
+			router.replace({
+				pathname: "/(main)",
+				params: { isNewUser: "true" },
+			})
 		} catch (error) {
 			setErrorMessage("Помилка при підтвердженні коду");
 		}

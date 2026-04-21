@@ -1,6 +1,7 @@
 import { ChatsIcon } from "./_icons/Chats";
 import { CheckBoxIcon } from "./_icons/CheckBox";
 import { CloseIcon } from "./_icons/Close";
+import { DeleteIcon } from "./_icons/Delete";
 import { EditIcon } from "./_icons/Edit";
 import { EyeClosedIcon } from "./_icons/EyeClosed";
 import { EyeOpenedIcon } from "./_icons/EyeOpened";
@@ -10,6 +11,7 @@ import { HomeIcon } from "./_icons/Home";
 import { LogoutIcon } from "./_icons/Logout";
 import { PlusIcon } from "./_icons/Plus";
 import { SettingsIcon } from "./_icons/Settings";
+import { threePointsIcon } from "./_icons/threePoints";
 
 export const Icons = {
 	PlusIcon,
@@ -24,4 +26,6 @@ export const Icons = {
 	EditIcon,
 	CheckBoxIcon,
 	CloseIcon,
+	threePointsIcon,
+	DeleteIcon,
 };

@@ -1,6 +1,7 @@
 import { SubHeader } from "@modules/layout";
 import { COLORS } from "@shared/constants/colors";
-import { Icons, Link, SubLink } from "@shared/ui";
+import { Icons } from "@shared/ui/icons";
+import { Link } from "@shared/ui/link";
 import { Stack, usePathname, useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
 

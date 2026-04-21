@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		paddingVertical: 44,
 		backgroundColor: COLORS.white,
-		borderRadius: 20
+		borderRadius: 20,
 	},
 	nav: {
 		flexDirection: "row",

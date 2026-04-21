@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { styles } from "./main-card.styles";
-import { Button, Icons, Input } from "@shared/ui";
 import { useUserContext } from "@modules/auth/context/user.context";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,6 +10,9 @@ import { UpdateUserProfileCredentaials } from "@modules/settings/api/api.types";
 import { mainCardValidator } from "@modules/settings/models/validators";
 import { MainCardT } from "@modules/settings/models/types";
 import { PasswordCard } from "./password-card";
+import { Input } from "@shared/ui/input";
+import { Button } from "@shared/ui/button";
+import { Icons } from "@shared/ui/icons";
 
 export function MainCard() {
 	const { user, setUser } = useUserContext();

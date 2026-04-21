@@ -12,7 +12,7 @@ export interface UpdateUserProfileCredentaials {
 	birthday?: Date;
 }
 export interface UpdatePasswordCredentials {
-	newPassword: string
+	newPassword: string;
 }
 
 export interface CodeValidateCredentials {
@@ -28,4 +28,32 @@ export interface CodeGenerateCredentials {
 }
 export interface CodeGenerateResponse {
 	message: string;
+}
+export type Tag = {
+	id: number;
+	name: string;
+};
+export type Album = {
+	id: number;
+	year: number;
+	name: string;
+	images: Image[];
+	topic: Tag;
+	topicId: number;
+	userId: number;
+};
+export type Image = {
+	id: number;
+	filename: string;
+	isVisible: boolean;
+	albumId: number;
+};
+export interface AlbumCredentials {
+	name: string;
+	topicId: number;
+	year: number;
+}
+export interface UploadImagesArgs {
+	albumId: number;
+	images: string[];
 }

@@ -1,11 +1,16 @@
 import { baseApi } from "@shared/api/base-api";
 import {
+	Album,
+	AlbumCredentials,
 	CodeGenerateCredentials,
 	CodeGenerateResponse,
+	Image,
+	Tag,
 	UpdateAvatarCredentials,
 	UpdatePasswordCredentials,
 	UpdateSignatureCredentials,
 	UpdateUserProfileCredentaials,
+	UploadImagesArgs,
 } from "./api.types";
 import { User } from "@modules/auth/models/types";
 
@@ -70,6 +75,46 @@ const settingsApi = baseApi.injectEndpoints({
 					body,
 				}),
 			}),
+			tags: builder.query<Tag[], void>({
+				query() {
+					return {
+						url: "/album/tags",
+					};
+				},
+			}),
+			albums: builder.query<Album[], void>({
+				query() {
+					return {
+						url: "/album/my",
+					};
+				},
+			}),
+			albumCreate: builder.mutation<Album, AlbumCredentials>({
+				query: (body) => ({
+					url: "/album",
+					body,
+					method: "POST",
+				}),
+			}),
+			uploadImages: builder.mutation<Image[], UploadImagesArgs>({
+				query: ({ albumId, images }) => {
+					const form = new FormData();
+
+					images.forEach((uri, index) => {
+						form.append("images", {
+							uri: uri,
+							name: `${Date.now()}_${index}.jpeg`,
+							type: "image/jpeg",
+						} as any);
+					});
+
+					return {
+						url: `/album/${albumId}/images`,
+						body: form,
+						method: "POST",
+					};
+				},
+			}),
 		};
 	},
 });
@@ -80,4 +125,8 @@ export const {
 	useUpdateSignatureMutation,
 	usePasswordGenerateCodeMutation,
 	useSetNewPasswordMutation,
+	useTagsQuery,
+	useLazyAlbumsQuery,
+	useAlbumCreateMutation,
+	useUploadImagesMutation,
 } = settingsApi;

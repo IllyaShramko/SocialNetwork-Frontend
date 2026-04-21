@@ -1,4 +1,3 @@
-import { Button, Icons } from "@shared/ui";
 import { Text, View } from "react-native";
 import { styles } from "./signature-name.styles";
 import { ModalSignatureUpdate } from "../modal-canvas-signature";
@@ -11,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signatureValidator } from "@modules/settings/models/validators";
 import { SignatureCardT } from "@modules/settings/models/types";
 import { useUpdateSignatureMutation } from "@modules/settings/api";
+import { Button } from "@shared/ui/button";
+import { Icons } from "@shared/ui/icons";
 
 export function SignatureNameCard() {
 	const { user, setUser } = useUserContext();
@@ -41,7 +42,7 @@ export function SignatureNameCard() {
 			setUser(response);
 			setValue("signature", null);
 		} catch (error) {
-			console.error("Error updating avatar:", error);
+			console.error("Error updating signature:", error);
 		}
 	}
 

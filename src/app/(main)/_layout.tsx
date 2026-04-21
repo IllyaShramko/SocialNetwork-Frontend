@@ -2,7 +2,7 @@ import { HomeHeader } from "@modules/layout";
 import { COLORS } from "@shared/constants/colors";
 import { FONT_SIZE } from "@shared/constants/font-size";
 import { typography } from "@shared/theme";
-import { Icons } from "@shared/ui";
+import { Icons } from "@shared/ui/icons";
 import { Tabs } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 

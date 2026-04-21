@@ -1,4 +1,3 @@
-import { Button, Icons, Images } from "@shared/ui";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { styles } from "./header.styles";
@@ -6,6 +5,9 @@ import { usePathname, useRouter } from "expo-router";
 import { COLORS } from "@shared/constants/colors";
 import { useUserContext } from "@modules/auth/context/user.context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Images } from "@shared/ui/images";
+import { Button } from "@shared/ui/button";
+import { Icons } from "@shared/ui/icons";
 
 export function HomeHeader() {
 	const { setToken, setUser } = useUserContext();

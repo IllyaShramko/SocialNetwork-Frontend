@@ -28,5 +28,10 @@ export const styles = StyleSheet.create({
 	},
 	inputs: {
 		gap: 16
+	},
+	errorText: {
+		color: COLORS.red,
+		fontFamily: typography.medium.fontFamily,
+		textAlign: "center"
 	}
 });

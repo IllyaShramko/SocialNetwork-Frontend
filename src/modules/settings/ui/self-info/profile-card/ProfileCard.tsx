@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "./profile-card.styles";
-import { Button, Icons, Input } from "@shared/ui";
 import { Image } from "expo-image";
 import { useUserContext } from "@modules/auth/context/user.context";
-import { pickImage } from "@shared/index";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { profileCardValidator } from "@modules/settings/models/validators";
@@ -14,6 +12,10 @@ import {
 	useUpdateMutation,
 } from "@modules/settings/api";
 import { ProfileCardT } from "@modules/settings/models/types/profile-update.types";
+import { Button } from "@shared/ui/button";
+import { pickImage } from "@shared/tools/pick-image";
+import { Icons } from "@shared/ui/icons";
+import { Input } from "@shared/ui/input";
 
 export function ProfileCard() {
 	const { user, setUser } = useUserContext();

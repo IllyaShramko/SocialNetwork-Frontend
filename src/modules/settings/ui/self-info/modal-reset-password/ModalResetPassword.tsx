@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { styles } from "./modal.styles";
 import { Controller, useForm } from "react-hook-form";
-import { Button, Icons, Input } from "@shared/ui";
 import { RegFormStepTwo } from "@modules/auth/models/types";
 import { useRef, useState } from "react";
 import { registerValidators } from "@modules/auth/models/validators";
@@ -20,6 +19,9 @@ import { useUserContext } from "@modules/auth/context/user.context";
 import { useNewPasswordContext } from "@modules/settings/context/new-password.context";
 import { ModalResetPasswordProps } from "./modal.types";
 import { useSetNewPasswordMutation } from "@modules/settings/api";
+import { Input } from "@shared/ui/input";
+import { Icons } from "@shared/ui/icons";
+import { Button } from "@shared/ui/button";
 
 export function ModalResetPassword(props: ModalResetPasswordProps) {
 	const { visible, onClose } = props;

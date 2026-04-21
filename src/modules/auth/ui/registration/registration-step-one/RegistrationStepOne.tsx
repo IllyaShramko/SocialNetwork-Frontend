@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Text, View } from "react-native";
 import { styles } from "./registration.styles";
-import { Button, Icons, Input, SubLink } from "@shared/ui";
 import { Controller, useForm } from "react-hook-form";
 import { registerValidators } from "../../../models/validators/register.validation";
 import { useRouter } from "expo-router";
@@ -9,6 +8,9 @@ import { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 import { useGenerateCodeMutation } from "@modules/auth/api";
 import { RegFormStepOne } from "@modules/auth/models/types/registration.types";
+import { SubLink } from "@shared/ui/subLink";
+import { Input } from "@shared/ui/input";
+import { Button } from "@shared/ui/button";
 
 export function RegistrationStepOne() {
 	const { handleSubmit, control } = useForm<RegFormStepOne>({
@@ -21,7 +23,10 @@ export function RegistrationStepOne() {
 		},
 	});
 	const router = useRouter();
-	const [generateCode, { isLoading: isGeneratingCode, error: generateCodeError }] = useGenerateCodeMutation()
+	const [
+		generateCode,
+		{ isLoading: isGeneratingCode, error: generateCodeError },
+	] = useGenerateCodeMutation();
 	const [errorMessageEmail, setErrorMessageEmail] = useState<string>("");
 
 	async function onSubmit(data: RegFormStepOne) {
@@ -35,7 +40,9 @@ export function RegistrationStepOne() {
 				return;
 			}
 			if (codeGenerateReponse.message === "INTERNAL_ERROR") {
-				setErrorMessageEmail("Помилка при надсиланні коду підтвердження");
+				setErrorMessageEmail(
+					"Помилка при надсиланні коду підтвердження",
+				);
 				return;
 			}
 			router.push({
@@ -43,8 +50,8 @@ export function RegistrationStepOne() {
 				params: { email: data.email, password: data.password },
 			});
 		} catch (error) {
-			console.log(error)
-			return
+			console.log(error);
+			return;
 		}
 	}
 	return (
@@ -85,7 +92,10 @@ export function RegistrationStepOne() {
 									onChangeText={field.onChange}
 									value={field.value}
 									label="Електронна пошта"
-									error={fieldState.error?.message || errorMessageEmail}
+									error={
+										fieldState.error?.message ||
+										errorMessageEmail
+									}
 									accessable={!isGeneratingCode}
 								/>
 							);
@@ -136,7 +146,9 @@ export function RegistrationStepOne() {
 					<Button
 						variant="fill"
 						text={
-							isGeneratingCode ? "Надсилаємо код..." : "Створити акаунт"
+							isGeneratingCode
+								? "Надсилаємо код..."
+								: "Створити акаунт"
 						}
 						onPress={handleSubmit(onSubmit)}
 						disabled={isGeneratingCode}

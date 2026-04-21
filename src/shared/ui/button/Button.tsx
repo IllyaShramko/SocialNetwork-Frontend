@@ -19,6 +19,7 @@ export function Button(props: ButtonProps) {
 			style={[
 				styles.button,
 				styles[variant],
+				text && styles.buttonWithPaddings,
 				style,
 				disabled && styles.disabled,
 			]}

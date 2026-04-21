@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { styles } from "./password-card.styles";
-import { Button, Icons, Input } from "@shared/ui";
 import { useUserContext } from "@modules/auth/context/user.context";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,6 +11,9 @@ import { passwordValidator } from "@modules/settings/models/validators";
 import { PasswordCardProps } from "./password-card.types";
 import { useNewPasswordContext } from "@modules/settings/context/new-password.context";
 import { usePasswordGenerateCodeMutation } from "@modules/settings/api";
+import { Button } from "@shared/ui/button";
+import { Icons } from "@shared/ui/icons";
+import { Input } from "@shared/ui/input";
 
 export function PasswordCard({ setGlobalEdit }: PasswordCardProps) {
 	const { user, setUser } = useUserContext();
