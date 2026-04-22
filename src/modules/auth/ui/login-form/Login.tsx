@@ -48,7 +48,7 @@ export function LoginForm() {
 		}
 	}
 	return (
-		<KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
+		<KeyboardAwareScrollView style={{ flex: 1 }}>
 			<View style={styles.container}>
 				<View style={styles.nav}>
 					<SubLink
