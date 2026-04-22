@@ -10,9 +10,9 @@ export default function AuthLayout() {
 			edges={["bottom"]}
 			style={{ flex: 1, backgroundColor: COLORS.plum50 }}
 		>
-			<View style={{ flex: 1, backgroundColor: COLORS.plum50, gap: 39 }}>
+			<View style={{ flex: 1, backgroundColor: COLORS.plum50, }}>
 				<AuthHeader />
-				<KeyboardAwareScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
+				<KeyboardAwareScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 ,justifyContent: "center", alignItems: "center" }}>
 					<Stack screenOptions={{ headerShown: false }}>
 						<Stack.Screen name="register/step-one" />
 						<Stack.Screen name="register/step-two" />

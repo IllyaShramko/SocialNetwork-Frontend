@@ -5,7 +5,7 @@ import { View, Text } from "react-native";
 
 export default function Page() {
 	return (
-		<View style={{ backgroundColor: COLORS.plum50, flex: 1 }}>
+		<View style={{ backgroundColor: COLORS.plum50, flex: 1, alignItems: "center"}}>
 			<LoginForm />
 		</View>
 	);
