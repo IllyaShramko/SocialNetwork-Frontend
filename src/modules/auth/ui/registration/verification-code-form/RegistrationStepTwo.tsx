@@ -14,6 +14,7 @@ import {
 } from "@modules/auth/api";
 import { Input } from "@shared/ui/input";
 import { Button } from "@shared/ui/button";
+import { isApiError } from "@shared/api/types";
 
 export function RegistrationStepTwo() {
 	const { setToken } = useUserContext();
@@ -91,13 +92,26 @@ export function RegistrationStepTwo() {
 			router.replace({
 				pathname: "/(main)",
 				params: { isNewUser: "true" },
-			})
+			});
 		} catch (error) {
-			setErrorMessage("Помилка при підтвердженні коду");
+			console.log(error)
+			if (isApiError(error)) {
+				if (error.status === 404) {
+					setErrorMessage("Код не знайдений. Перевірьте правильність коду");
+					return
+				}
+			}
+			setErrorMessage("Помилка при підтвердженні коду. Спробуйте пізніше");
 		}
 	}
 	return (
-		<KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
+		<KeyboardAwareScrollView
+			style={{ paddingHorizontal: 16, paddingVertical: 8 }}
+			contentContainerStyle={{
+				flexGrow: 1,
+				justifyContent: "center", 
+			}}
+		>
 			<View style={styles.container}>
 				<View>
 					<Text style={styles.welcomeText}>Підтвердження пошти</Text>
@@ -138,7 +152,7 @@ export function RegistrationStepTwo() {
 											}
 											accessable={!isLoading}
 											isError={
-												!!fieldState.error?.message
+												!!fieldState.error?.message || !!errorMessage
 											}
 										/>
 									);
@@ -170,7 +184,7 @@ export function RegistrationStepTwo() {
 											}
 											accessable={!isLoading}
 											isError={
-												!!fieldState.error?.message
+												!!fieldState.error?.message || !!errorMessage
 											}
 										/>
 									);
@@ -204,7 +218,7 @@ export function RegistrationStepTwo() {
 											}
 											accessable={!isLoading}
 											isError={
-												!!fieldState.error?.message
+												!!fieldState.error?.message || !!errorMessage
 											}
 										/>
 									);
@@ -236,7 +250,7 @@ export function RegistrationStepTwo() {
 											}
 											accessable={!isLoading}
 											isError={
-												!!fieldState.error?.message
+												!!fieldState.error?.message || !!errorMessage
 											}
 										/>
 									);
@@ -270,7 +284,7 @@ export function RegistrationStepTwo() {
 											}
 											accessable={!isLoading}
 											isError={
-												!!fieldState.error?.message
+												!!fieldState.error?.message || !!errorMessage
 											}
 										/>
 									);
@@ -299,17 +313,17 @@ export function RegistrationStepTwo() {
 											}
 											accessable={!isLoading}
 											isError={
-												!!fieldState.error?.message
+												!!fieldState.error?.message || !!errorMessage
 											}
 										/>
 									);
 								}}
 							/>
 						</View>
-						{errorMessage && (
-							<Text style={styles.errorText}>{errorMessage}</Text>
-						)}
 					</View>
+					{errorMessage && (
+						<Text style={styles.errorText}>{errorMessage}</Text>
+					)}
 				</View>
 				<View style={styles.buttonsContainer}>
 					<Button

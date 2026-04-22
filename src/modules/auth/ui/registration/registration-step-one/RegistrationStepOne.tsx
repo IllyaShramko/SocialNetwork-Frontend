@@ -11,6 +11,7 @@ import { RegFormStepOne } from "@modules/auth/models/types/registration.types";
 import { SubLink } from "@shared/ui/subLink";
 import { Input } from "@shared/ui/input";
 import { Button } from "@shared/ui/button";
+import { COLORS } from "@shared/constants/colors";
 
 export function RegistrationStepOne() {
 	const { handleSubmit, control } = useForm<RegFormStepOne>({
@@ -50,12 +51,17 @@ export function RegistrationStepOne() {
 				params: { email: data.email, password: data.password },
 			});
 		} catch (error) {
-			console.log(error);
 			return;
 		}
 	}
 	return (
-		<KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
+		<KeyboardAwareScrollView
+			style={{ paddingHorizontal: 16, paddingVertical: 8 }}
+			contentContainerStyle={{
+				flexGrow: 1,
+				justifyContent: "center",
+			}}
+		>
 			<View style={styles.container}>
 				<View style={styles.nav}>
 					<SubLink

@@ -12,7 +12,7 @@ import { Input } from "@shared/ui/input";
 import { SubLink } from "@shared/ui/subLink";
 import { Button } from "@shared/ui/button";
 import { useState } from "react";
-import { ApiError } from "@shared/api/types";
+import { ApiError, isApiError } from "@shared/api/types";
 export function LoginForm() {
 	const { handleSubmit, control } = useForm<LoginFormT>({
 		resolver: yupResolver(loginValidator),
@@ -24,31 +24,37 @@ export function LoginForm() {
 	});
 	const router = useRouter();
 	const [login, { isLoading, error }] = useLoginMutation();
-	const [errorAfter, setErrorAfter] = useState<string | null>(null)
-	const { setToken } = useUserContext()
+	const [errorAfter, setErrorAfter] = useState<string | null>(null);
+	const { setToken } = useUserContext();
 
 	async function onSubmit(data: LoginFormT) {
 		try {
-			setErrorAfter(null)
+			setErrorAfter(null);
 			const response = await login(data).unwrap();
 			setToken(response.token);
-			console.log(response.token);
 			router.replace({
 				pathname: "/(main)",
 				params: { isNewUser: "true" },
-			})
+			});
 		} catch (e) {
-			const error = e as ApiError; 
-			console.log(error)
-			if (error.status === 404 || error.status === 401) {
-				setErrorAfter("Неправильна пошта або пароль.");
-			} else {
-				setErrorAfter("Помилка вхіду, спробуйте пізніше");
+			if (isApiError(error)) {
+				if (error.status === 404 || error.status === 401) {
+					setErrorAfter("Неправильна пошта або пароль.");
+				} else {
+					setErrorAfter("Помилка вхіду, спробуйте пізніше");
+				}
 			}
+			console.log(error);
 		}
 	}
 	return (
-		<KeyboardAwareScrollView style={{ paddingHorizontal: 16 }}>
+		<KeyboardAwareScrollView
+			style={{ paddingHorizontal: 16, paddingVertical: 8 }}
+			contentContainerStyle={{
+				flexGrow: 1,
+				justifyContent: "center",
+			}}
+		>
 			<View style={styles.container}>
 				<View style={styles.nav}>
 					<SubLink
@@ -66,7 +72,9 @@ export function LoginForm() {
 					/>
 				</View>
 				<View>
-					<Text style={styles.welcomeText}>Раді тебе знову бачити!</Text>
+					<Text style={styles.welcomeText}>
+						Раді тебе знову бачити!
+					</Text>
 				</View>
 				<View style={styles.inputs}>
 					<Controller
@@ -109,7 +117,9 @@ export function LoginForm() {
 							);
 						}}
 					/>
-					{errorAfter && <Text style={styles.errorText}>{errorAfter}</Text>}
+					{errorAfter && (
+						<Text style={styles.errorText}>{errorAfter}</Text>
+					)}
 				</View>
 				<View>
 					<Button

@@ -1,7 +1,6 @@
 import { LoginForm } from "@modules/auth";
 import { COLORS } from "@shared/constants/colors";
-import { Link } from "expo-router";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 
 export default function Page() {
 	return (
