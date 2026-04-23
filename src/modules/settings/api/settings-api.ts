@@ -12,6 +12,7 @@ import {
 	UpdateSignatureCredentials,
 	UpdateUserProfileCredentaials,
 	UploadImagesArgs,
+	
 } from "./api.types";
 import { User } from "@modules/auth/models/types";
 
@@ -132,6 +133,14 @@ const settingsApi = baseApi.injectEndpoints({
 					};
 				},
 			}),
+			deleteAlbum: builder.mutation<Album, number>({
+				query(albumId) {
+					return {
+						url: `/album/${albumId}`,
+						method: "DELETE",
+					};
+				},
+			}),
 		};
 	},
 });
@@ -147,5 +156,7 @@ export const {
 	useAlbumCreateMutation,
 	useUploadImagesMutation,
 	useDeleteImageMutation,
-	useChangeVisibilityImageMutation
+	useChangeVisibilityImageMutation,
+	useDeleteAlbumMutation,
+	
 } = settingsApi;

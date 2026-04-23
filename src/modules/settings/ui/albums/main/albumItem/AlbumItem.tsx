@@ -2,6 +2,8 @@ import {
 	useDeleteImageMutation,
 	useChangeVisibilityImageMutation,
 	useUploadImagesMutation,
+	useDeleteAlbumMutation,
+
 } from "@modules/settings/api";
 import { COLORS } from "@shared/constants/colors";
 import { pickImage } from "@shared/tools/pick-image";
@@ -17,6 +19,7 @@ import { styles } from "./album-item.styles";
 export function AlbumItem(props: AlbumProps) {
 	const { album, refetch } = props;
 	const [deleteImage, { data: deletedImage }] = useDeleteImageMutation();
+	const [deleteAlbum] = useDeleteAlbumMutation();
 	const [changeVisibilityImage, { data: changedImage }] =
 		useChangeVisibilityImageMutation();
 	const [tempImages, setTempImages] = useState<
@@ -25,6 +28,7 @@ export function AlbumItem(props: AlbumProps) {
 	const [uploadImages] = useUploadImagesMutation();
 	const [whichActive, setWhichActive] = useState<number | null>(null);
 	const [loadingIds, setLoadingIds] = useState<number[]>([]);
+
 
 	async function handleAddImages(albumId: number) {
 		const result = await pickImage(false, {
@@ -104,6 +108,15 @@ export function AlbumItem(props: AlbumProps) {
 		}
 		setLoadingIds((prev) => prev.filter((id) => id !== imageId));
 	}
+	async function handleDeleteIAlbum(albumId: number) {
+		try {
+			const response = await deleteAlbum(albumId).unwrap();
+			
+			refetch();
+		} catch (error) {
+			console.log(error);
+		}
+	}
 	return (
 		<View key={album.id} style={styles.container}>
 			<View style={styles.header}>
@@ -155,7 +168,7 @@ export function AlbumItem(props: AlbumProps) {
 								text="Видалити альбом"
 								iconLeft={<Icons.DeleteIcon />}
 								onPress={() => {
-									console.log("hello world deletion");
+									handleDeleteIAlbum(album.id);
 								}}
 							/>
 						</View>

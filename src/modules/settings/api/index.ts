@@ -10,4 +10,5 @@ export {
 	useUploadImagesMutation,
 	useChangeVisibilityImageMutation,
 	useDeleteImageMutation,
+	useDeleteAlbumMutation,
 } from "./settings-api";
