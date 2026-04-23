@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
 		borderWidth: 0,
 	},
 	outline: {
-		backgroundColor: "transparent",
+		backgroundColor: "#FFF",
 		borderWidth: 1,
 		borderRightColor: COLORS.plum,
 	},

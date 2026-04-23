@@ -6,7 +6,7 @@ export const COLORS = {
 	plum: "#543C52",
 	plum50: "#E9E5EE",
 	white: "#FFFFFF",
-	fog: "#FAF8FF",
+	fog: "rgba(255, 255, 255, 0.8)",
 	green: "#22C55E",
 	red: "#FF4C4C",
 };

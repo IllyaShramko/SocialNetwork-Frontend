@@ -5,6 +5,7 @@ import {
 	CodeGenerateCredentials,
 	CodeGenerateResponse,
 	Image,
+	MutationImageArgs,
 	Tag,
 	UpdateAvatarCredentials,
 	UpdatePasswordCredentials,
@@ -115,6 +116,22 @@ const settingsApi = baseApi.injectEndpoints({
 					};
 				},
 			}),
+			deleteImage: builder.mutation<Image, MutationImageArgs>({
+				query({ imageId, albumId }) {
+					return {
+						url: `/album/${albumId}/images/${imageId}`,
+						method: "DELETE",
+					};
+				},
+			}),
+			changeVisibilityImage: builder.mutation<Image, MutationImageArgs>({
+				query({ imageId, albumId }) {
+					return {
+						url: `/album/${albumId}/images/${imageId}`,
+						method: "PATCH",
+					};
+				},
+			}),
 		};
 	},
 });
@@ -129,4 +146,6 @@ export const {
 	useLazyAlbumsQuery,
 	useAlbumCreateMutation,
 	useUploadImagesMutation,
+	useDeleteImageMutation,
+	useChangeVisibilityImageMutation
 } = settingsApi;

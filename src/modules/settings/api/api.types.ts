@@ -57,3 +57,10 @@ export interface UploadImagesArgs {
 	albumId: number;
 	images: string[];
 }
+export interface MutationImageArgs {
+	albumId: number;
+	imageId: number
+}
+export interface DeleteAlbumArgs {
+	albumId: number;
+}

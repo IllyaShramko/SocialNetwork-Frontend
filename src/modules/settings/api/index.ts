@@ -7,5 +7,7 @@ export {
 	useTagsQuery,
 	useLazyAlbumsQuery,
 	useAlbumCreateMutation,
-	useUploadImagesMutation
+	useUploadImagesMutation,
+	useChangeVisibilityImageMutation,
+	useDeleteImageMutation,
 } from "./settings-api";

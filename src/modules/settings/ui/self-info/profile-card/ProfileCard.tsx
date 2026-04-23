@@ -25,7 +25,7 @@ export function ProfileCard() {
 	const [update, { isLoading: isUpdating }] = useUpdateMutation();
 	const [avatarUrl, setAvatarUrl] = useState<string>(
 		user?.avatarUrl
-			? `http://192.168.50.244:8000/images/${user.avatarUrl}`
+			? `http://192.168.50.244:8000/media/thumb/${user.avatarUrl}`
 			: "https://static.vecteezy.com/system/resources/previews/013/360/247/non_2x/default-avatar-photo-icon-social-media-profile-sign-symbol-vector.jpg",
 	);
 	const {
@@ -51,7 +51,7 @@ export function ProfileCard() {
 				setUser(response);
 				console.log(response.avatarUrl);
 				setAvatarUrl(
-					`http://192.168.50.244:8000/images/${response.avatarUrl}`,
+					`http://192.168.50.244:8000/media/thumb/${response.avatarUrl}`,
 				);
 				setIsUpdatedAvatar(false);
 			} catch (error) {

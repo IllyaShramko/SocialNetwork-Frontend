@@ -111,7 +111,7 @@ export function SignatureNameCard() {
 									{user?.signature ? (
 										<Image
 											source={{
-												uri: `http://192.168.50.244:8000/images_signs/${user.signature}`,
+												uri: `http://192.168.50.244:8000/media/original/${user.signature}`,
 											}}
 											style={styles.signatureImage}
 										/>
