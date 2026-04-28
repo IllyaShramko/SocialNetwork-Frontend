@@ -53,14 +53,28 @@ export interface AlbumCredentials {
 	topicId: number;
 	year: number;
 }
+export interface AlbumUpdateCredentials {
+	id: number;
+	name: string;
+	topicId: number;
+	year: number;
+}
+
+export interface DeleteArgs {
+	id: number;
+}
+
 export interface UploadImagesArgs {
 	albumId: number;
 	images: string[];
 }
+
 export interface MutationImageArgs {
 	albumId: number;
-	imageId: number
+	imageId: number;
 }
+
+
 export interface DeleteAlbumArgs {
 	albumId: number;
 }

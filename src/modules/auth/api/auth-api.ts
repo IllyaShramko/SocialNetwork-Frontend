@@ -6,10 +6,10 @@ import {
 	CodeValidateResponse,
 	LoginCredentials,
 	LoginResponse,
-	MeResponse,
 	RegisterCredentials,
 	RegisterResponse,
 } from "./api.types";
+import { User } from "@shared/api/types";
 
 const authApi = baseApi.injectEndpoints({
 	endpoints(builder) {
@@ -30,7 +30,7 @@ const authApi = baseApi.injectEndpoints({
 					};
 				},
 			}),
-			me: builder.query<MeResponse, void>({
+			me: builder.query<User, void>({
 				query() {
 					return {
 						url: "users/me",
