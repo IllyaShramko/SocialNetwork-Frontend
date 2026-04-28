@@ -1,4 +1,3 @@
-import { User } from "../models/types";
 
 export interface LoginResponse {
 	token: string;
@@ -15,8 +14,6 @@ export interface RegisterCredentials {
 	email: string;
 	password: string;
 }
-
-export type MeResponse = User;
 
 export interface CodeValidateCredentials {
 	email: string;

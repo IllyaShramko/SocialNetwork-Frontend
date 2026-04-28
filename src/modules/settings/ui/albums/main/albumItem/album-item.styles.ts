@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
 		padding: 16,
 		gap: 16,
 		borderRadius: 10,
+		minWidth: 220
 	},
 	header: {
 		flexDirection: "row",
@@ -45,15 +46,30 @@ export const styles = StyleSheet.create({
 		flexWrap: "wrap",
 		flexDirection: "row",
 	},
+	topicNameAndYear: {
+		gap: 16,
+		alignItems: "center",
+		flexDirection: "row"
+	},
+	hr: {
+		width: "100%",
+		height: 1,
+		backgroundColor: COLORS.blue20
+	},
 	//
 	textHeader: {
 		fontSize: 16,
 		color: COLORS.blue,
 		fontFamily: typography.medium.fontFamily,
 	},
-	buttonText: {
+	topicName: {
 		fontSize: 16,
-		color: COLORS.plum,
-		fontFamily: typography.medium.fontFamily,
+		color: COLORS.blue,
+		fontFamily: typography.regular.fontFamily,
 	},
+	year: {
+		fontSize: 16,
+		color: COLORS.blue50,
+		fontFamily: typography.regular.fontFamily,
+	}
 });

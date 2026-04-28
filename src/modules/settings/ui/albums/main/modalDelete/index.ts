@@ -1,0 +1,1 @@
+export { ModalUpdateAlbum } from "./ModalDeleteAlbum"

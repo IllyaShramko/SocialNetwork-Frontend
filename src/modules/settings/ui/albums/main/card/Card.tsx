@@ -1,13 +1,12 @@
 import { ScrollView, Text, View } from "react-native";
 import { styles as stylesAlbum } from "../albumItem/album-item.styles";
 import { useEffect, useState } from "react";
-import { COLORS } from "@shared/constants/colors";
 import { ModalCreateAlbum } from "../modalCreate/ModalCreateAlbum";
 import { useLazyAlbumsQuery } from "@modules/settings/api";
 import { Button } from "@shared/ui/button";
 import { Icons } from "@shared/ui/icons";
 import { AlbumItem } from "../albumItem/AlbumItem";
-export function HeadCard() {
+export function MainCard() {
 	const [getAlbums, { data }] = useLazyAlbumsQuery();
 	const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
 
@@ -19,16 +18,7 @@ export function HeadCard() {
 		<ScrollView contentContainerStyle={{ flexGrow: 1, gap: 8 }}>
 			{data && data.length !== 0 ? (
 				<>
-					{data.map((album) => {
-						return (
-							<AlbumItem
-								key={album.id}
-								album={album}
-								refetch={getAlbums}
-							/>
-						);
-					})}
-					{/* <View style={stylesAlbum.container}>
+					<View style={stylesAlbum.container}>
 						<View style={stylesAlbum.header}>
 							<Text style={stylesAlbum.textHeader}>
 								Додати ще альбом
@@ -41,7 +31,16 @@ export function HeadCard() {
 								}}
 							/>
 						</View>
-					</View> */}
+					</View>
+					{data.map((album) => {
+						return (
+							<AlbumItem
+								key={album.id}
+								album={album}
+								refetch={getAlbums}
+							/>
+						);
+					})}
 				</>
 			) : (
 				<View style={stylesAlbum.container}>

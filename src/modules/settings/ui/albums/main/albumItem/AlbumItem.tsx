@@ -13,9 +13,12 @@ import { ImageItem } from "../imageItem/ImageItem";
 import { AlbumProps } from "./album-item.types";
 import { Button } from "@shared/ui/button";
 import { styles } from "./album-item.styles";
+import { ENV } from "@shared/constants/env";
+import { ModalUpdateAlbum } from "../modalEdit";
 
 export function AlbumItem(props: AlbumProps) {
 	const { album, refetch } = props;
+	const [isVisibleModal, setIsVisibleModal] = useState<boolean>(false);
 	const [deleteImage, { data: deletedImage }] = useDeleteImageMutation();
 	const [changeVisibilityImage, { data: changedImage }] =
 		useChangeVisibilityImageMutation();
@@ -52,7 +55,7 @@ export function AlbumItem(props: AlbumProps) {
 				albumId: albumId,
 				images: cleanData,
 			}).unwrap();
-
+			console.log("gefefe")
 			refetch();
 
 			setTempImages((prev) =>
@@ -141,6 +144,7 @@ export function AlbumItem(props: AlbumProps) {
 								text="Редагувати допис"
 								iconLeft={<Icons.EditIcon />}
 								onPress={() => {
+									setIsVisibleModal(true);
 									console.log("hello world rediction");
 								}}
 							/>
@@ -162,12 +166,18 @@ export function AlbumItem(props: AlbumProps) {
 					)}
 				</View>
 			</View>
+			<View style={styles.topicNameAndYear}>
+				<Text style={styles.topicName}>{album.topic.name}</Text>
+				<Text style={styles.year}>{album.year} рік</Text>
+			</View>
+			<View style={styles.hr} />
+			<Text style={styles.textHeader}>Фотографії</Text>
 			<View style={styles.body}>
 				{album.images.map((img) => (
 					<ImageItem
 						key={img.id}
 						id={img.id}
-						uri={`http://192.168.50.244:8000/media/thumb/${img.filename}`}
+						uri={`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${img.filename}`}
 						isLoading={loadingIds.includes(img.id)}
 						onDelete={(id) => {
 							handleDeleteImage(album.id, img.id);
@@ -194,6 +204,14 @@ export function AlbumItem(props: AlbumProps) {
 					<Button variant="outline" iconLeft={<Icons.PlusIcon />} />
 				</TouchableOpacity>
 			</View>
+			<ModalUpdateAlbum
+				visible={isVisibleModal}
+				onClose={() => {
+					setIsVisibleModal(false);
+					setWhichActive(null);
+				}}
+				album={album}
+			/>
 		</View>
 	);
 }

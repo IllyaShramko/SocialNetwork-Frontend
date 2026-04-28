@@ -12,6 +12,7 @@ import { SignatureCardT } from "@modules/settings/models/types";
 import { useUpdateSignatureMutation } from "@modules/settings/api";
 import { Button } from "@shared/ui/button";
 import { Icons } from "@shared/ui/icons";
+import { ENV } from "@shared/constants/env";
 
 export function SignatureNameCard() {
 	const { user, setUser } = useUserContext();
@@ -111,7 +112,7 @@ export function SignatureNameCard() {
 									{user?.signature ? (
 										<Image
 											source={{
-												uri: `http://192.168.50.244:8000/media/original/${user.signature}`,
+												uri: `http://${ENV.HOST}:${ENV.PORT}/media/original/${user.signature}`,
 											}}
 											style={styles.signatureImage}
 										/>

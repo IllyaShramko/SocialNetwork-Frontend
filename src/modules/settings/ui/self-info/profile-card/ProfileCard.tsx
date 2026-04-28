@@ -16,6 +16,7 @@ import { Button } from "@shared/ui/button";
 import { pickImage } from "@shared/tools/pick-image";
 import { Icons } from "@shared/ui/icons";
 import { Input } from "@shared/ui/input";
+import { ENV } from "@shared/constants/env";
 
 export function ProfileCard() {
 	const { user, setUser } = useUserContext();
@@ -24,9 +25,9 @@ export function ProfileCard() {
 	const [updateAvatar, { isLoading }] = useUpdateAvatarMutation();
 	const [update, { isLoading: isUpdating }] = useUpdateMutation();
 	const [avatarUrl, setAvatarUrl] = useState<string>(
-		user?.avatarUrl
-			? `http://192.168.50.244:8000/media/thumb/${user.avatarUrl}`
-			: "https://static.vecteezy.com/system/resources/previews/013/360/247/non_2x/default-avatar-photo-icon-social-media-profile-sign-symbol-vector.jpg",
+		user?.avatars.length !== 0 && user?.avatars[0]
+			? `http://${ENV.HOST}:${ENV.PORT}/media/thumb/${user.avatars[0].image.filename}`
+			: `http://${ENV.HOST}:${ENV.PORT}/media/original/default-avatar.jpg`,
 	);
 	const {
 		handleSubmit,
@@ -49,9 +50,9 @@ export function ProfileCard() {
 					avatar: data.avatar,
 				}).unwrap();
 				setUser(response);
-				console.log(response.avatarUrl);
+				console.log(response.avatars[0].image.filename);
 				setAvatarUrl(
-					`http://192.168.50.244:8000/media/thumb/${response.avatarUrl}`,
+					`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${response.avatars[0].image.filename}`,
 				);
 				setIsUpdatedAvatar(false);
 			} catch (error) {
@@ -69,6 +70,7 @@ export function ProfileCard() {
 			}
 		}
 	}
+		
 
 	return (
 		<View style={[styles.container, isEdit && styles.focus]}>
@@ -104,12 +106,16 @@ export function ProfileCard() {
 									</Text>
 								)}
 								<View style={styles.avatarBlock}>
-									<Image
-										style={styles.avatar}
-										source={{
-											uri: avatarUrl,
-										}}
-									/>
+									<TouchableOpacity
+										disabled={!isEdit}
+									>
+										<Image
+											style={styles.avatar}
+											source={{
+												uri: avatarUrl,
+											}}
+										/>
+									</TouchableOpacity>
 								</View>
 								{isEdit && (
 									<View style={styles.buttonsContainer}>
@@ -121,7 +127,8 @@ export function ProfileCard() {
 													{
 														selectionLimit: 1,
 														allowsMultipleSelection: false,
-														allowsEditing: false,
+														allowsEditing: true,
+														aspect: [1, 1],
 														mediaTypes: ["images"],
 													},
 												);
@@ -151,7 +158,8 @@ export function ProfileCard() {
 													{
 														selectionLimit: 1,
 														allowsMultipleSelection: false,
-														allowsEditing: false,
+														allowsEditing: true,
+														aspect: [1, 1],
 														mediaTypes: ["images"],
 													},
 												);
