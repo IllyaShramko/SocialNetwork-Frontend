@@ -55,6 +55,8 @@ export type Post = {
 	links: Link[];
 	images: Image[];
 	tags: TagPost[];
+	likes: number;
+	hearted: number;
 	// will be determined on the backend
 	isLiked: boolean;
 	isHearted: boolean;
