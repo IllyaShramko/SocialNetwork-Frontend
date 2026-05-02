@@ -1,4 +1,5 @@
 import { FirstEnterModal } from "@modules/auth/ui/modal-first-enter";
+import { PostList } from "@modules/posts";
 import { COLORS } from "@shared/constants/colors";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
@@ -11,7 +12,7 @@ export default function Page() {
 	);
 	return (
 		<View style={{ flex: 1, backgroundColor: COLORS.plum50 }}>
-			<Text>Головна</Text>
+			<PostList />
 			<FirstEnterModal
 				isVisible={isWelcomeVisible}
 				onClose={() => setIsWelcomeVisible(false)}

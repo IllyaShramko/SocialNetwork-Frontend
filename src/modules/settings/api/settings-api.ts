@@ -8,14 +8,13 @@ import {
 	DeleteArgs,
 	Image,
 	MutationImageArgs,
-	Tag,
 	UpdateAvatarCredentials,
 	UpdatePasswordCredentials,
 	UpdateSignatureCredentials,
 	UpdateUserProfileCredentaials,
 	UploadImagesArgs,
 } from "./api.types";
-import { User } from "@shared/api/types";
+import { Tag, User } from "@shared/api/types";
 
 const settingsApi = baseApi
 	.enhanceEndpoints({ addTagTypes: ["Albums"] })

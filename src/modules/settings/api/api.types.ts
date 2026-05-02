@@ -1,3 +1,5 @@
+import { Tag } from "@shared/api/types";
+
 export interface UpdateAvatarCredentials {
 	avatar: string;
 }
@@ -29,10 +31,6 @@ export interface CodeGenerateCredentials {
 export interface CodeGenerateResponse {
 	message: string;
 }
-export type Tag = {
-	id: number;
-	name: string;
-};
 export type Album = {
 	id: number;
 	year: number;
@@ -73,7 +71,6 @@ export interface MutationImageArgs {
 	albumId: number;
 	imageId: number;
 }
-
 
 export interface DeleteAlbumArgs {
 	albumId: number;
