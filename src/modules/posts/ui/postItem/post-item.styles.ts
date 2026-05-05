@@ -37,6 +37,7 @@ export const styles = StyleSheet.create({
 	},
 	body: {
 		padding: 16,
+		gap: 16,
 	},
 	texts: {
 		gap: 6,
@@ -51,9 +52,32 @@ export const styles = StyleSheet.create({
 		fontFamily: typography.regular.fontFamily,
 		color: COLORS.blue,
 	},
-    tags: {
+	tags: {
 		fontSize: 14,
 		fontFamily: typography.regular.fontFamily,
 		color: COLORS.plum,
-    }
+	},
+	lineOfImages: {
+		height: 203,
+		gap: 8,
+		flexDirection: "row",
+	},
+	images: {
+		gap: 8,
+	},
+	footer: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		gap: 16
+	},
+	containerBtn: {
+		flexDirection: "row",
+		gap: 8,
+		alignItems: "center",
+	},
+	textBtn: {
+		fontFamily: typography.regular.fontFamily,
+		fontSize: 14,
+		color: COLORS.blue,
+	},
 });

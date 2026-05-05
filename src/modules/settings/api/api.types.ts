@@ -36,14 +36,14 @@ export type Album = {
 	year: number;
 	name: string;
 	images: Image[];
-	topic: Tag;
+	theme: string;
 	topicId: number;
 	userId: number;
 };
 export type Image = {
 	id: number;
-	filename: string;
-	isVisible: boolean;
+	image: string;
+	isShown: boolean;
 	albumId: number;
 };
 export interface AlbumCredentials {

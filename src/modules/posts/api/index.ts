@@ -1,3 +1,5 @@
 export {
-    useGetPostsQuery
-} from "./posts-api"
+	useGetPostsQuery,
+	useCreatePostMutation,
+	useGetMyPostsQuery,
+} from "./posts-api";

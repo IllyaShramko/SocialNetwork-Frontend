@@ -7,9 +7,12 @@ import { EyeClosedIcon } from "./_icons/EyeClosed";
 import { EyeOpenedIcon } from "./_icons/EyeOpened";
 import { FriendsIcon } from "./_icons/Friends";
 import { GalaryIcon } from "./_icons/Galary";
+import { HeartIcon } from "./_icons/Heart";
 import { HomeIcon } from "./_icons/Home";
+import { LikeIcon } from "./_icons/Like";
 import { LogoutIcon } from "./_icons/Logout";
 import { PlusIcon } from "./_icons/Plus";
+import { SendIcon } from "./_icons/Send";
 import { SettingsIcon } from "./_icons/Settings";
 import { threePointsIcon } from "./_icons/threePoints";
 
@@ -28,4 +31,7 @@ export const Icons = {
 	CloseIcon,
 	threePointsIcon,
 	DeleteIcon,
+	SendIcon,
+	HeartIcon,
+	LikeIcon
 };

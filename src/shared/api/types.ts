@@ -20,52 +20,65 @@ export type User = {
 	email: string;
 	username: string | null;
 	firstName: string | null;
-	surname: string | null;
-	birthday: Date | null;
+	lastName: string | null;
 	signature: string | null;
+	dateJoined: Date;
+	lastLogin: Date;
+	isSuperuser: boolean;
+	isStaff: boolean;
 	isActive: boolean;
-	avatars: Avatar[];
+	profile: Profile | null;
 };
 
-export type Avatar = {
-	image: Image;
+export type Profile = {
 	id: number;
-	imageId: number;
+	signature: string | null;
 	userId: number;
+	birthDate: Date | null;
+	pseudonym: string | null;
+	avatar: string | null;
+	is_image_signature: boolean;
+	is_text_signature: boolean;
 };
 
-export type Image = {
+// export type Avatar = {
+// 	image: Image;
+// 	id: number;
+// 	imageId: number;
+// 	userId: number;
+// };
+
+export type PostImage = {
 	id: number;
-	userId: number;
-	filename: string;
-	isVisible: boolean;
-	albumId: number | null;
-	imageId: number | null;
+	originalImage: string;
+	comressedImage: string;
+	postId: number;
 };
 
 export type Post = {
 	id: number;
 	title: string;
 	topic: string;
-	description: string;
-	views: number;
+	content: string;
 	author: User;
 	authorId: number;
 	createdAt: Date;
 	links: Link[];
-	images: Image[];
+	images: PostImage[];
 	tags: TagPost[];
-	likes: number;
-	hearted: number;
 	// will be determined on the backend
+	likes: number;
+	hearts: number;
+	views: number;
 	isLiked: boolean;
 	isHearted: boolean;
+	isViewed: boolean;
 };
 
 export type Link = {
 	id: number;
 	postId: number;
-	href: string;
+	url: string;
 };
 
 export type TagPost = {

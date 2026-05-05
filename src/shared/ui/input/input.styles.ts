@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 		gap: 10,
 		paddingHorizontal: 14,
-		height: 42,
 		width: "100%",
 		borderWidth: 1,
 		borderColor: COLORS.blue,

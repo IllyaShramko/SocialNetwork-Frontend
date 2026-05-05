@@ -1,10 +1,9 @@
-import { useGetPostsQuery } from "@modules/posts/api";
+import { useGetMyPostsQuery } from "@modules/posts/api";
 import { ActivityIndicator, FlatList, View } from "react-native";
 import { PostItem } from "../postItem";
 
 export function PostList() {
-	const { data, isFetching, isLoading } = useGetPostsQuery();
-	console.log(data)
+	const { data, isFetching, isLoading } = useGetMyPostsQuery();
 	return (
 		<View>
 			{isFetching || isLoading ? (
@@ -12,7 +11,9 @@ export function PostList() {
 			) : (
 				<FlatList
 					data={data}
-					renderItem={({ item }) => <PostItem key={item.id} post={item} />}
+					renderItem={({ item }) => (
+						<PostItem key={item.id} post={item} />
+					)}
 					contentContainerStyle={{ gap: 8, padding: 6 }}
 				/>
 			)}

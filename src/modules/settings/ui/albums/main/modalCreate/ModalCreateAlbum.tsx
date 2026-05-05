@@ -26,21 +26,18 @@ export function ModalCreateAlbum(props: ModalCreateAlbumProps) {
 	const { visible, onClose } = props;
 	const { data, isLoading: isLoadingTags } = useTagsQuery();
 	const [albumCreate, { isLoading }] = useAlbumCreateMutation();
-	const { handleSubmit, control, setValue, resetField } =
-		useForm<CreateAlbumT>({
-			resolver: yupResolver(createAlbumValidator),
-			mode: "onChange",
-			defaultValues: {
-				name: undefined,
-				topicId: undefined,
-				year: 2000,
-			},
-		});
+	const { handleSubmit, control, reset } = useForm<CreateAlbumT>({
+		resolver: yupResolver(createAlbumValidator),
+		mode: "onChange",
+		defaultValues: {
+			name: undefined,
+			topicId: undefined,
+			year: undefined,
+		},
+	});
 
 	function clearInputs() {
-		resetField("name");
-		resetField("topicId");
-		resetField("year");
+		reset();
 	}
 	async function onSubmit(data: CreateAlbumT) {
 		try {

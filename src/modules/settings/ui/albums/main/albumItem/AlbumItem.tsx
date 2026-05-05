@@ -167,7 +167,7 @@ export function AlbumItem(props: AlbumProps) {
 				</View>
 			</View>
 			<View style={styles.topicNameAndYear}>
-				<Text style={styles.topicName}>{album.topic.name}</Text>
+				<Text style={styles.topicName}>{album.theme}</Text>
 				<Text style={styles.year}>{album.year} рік</Text>
 			</View>
 			<View style={styles.hr} />
@@ -177,7 +177,7 @@ export function AlbumItem(props: AlbumProps) {
 					<ImageItem
 						key={img.id}
 						id={img.id}
-						uri={`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${img.filename}`}
+						uri={`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${img.image}`}
 						isLoading={loadingIds.includes(img.id)}
 						onDelete={(id) => {
 							handleDeleteImage(album.id, img.id);
@@ -185,7 +185,7 @@ export function AlbumItem(props: AlbumProps) {
 						onChangeVisibility={(id) => {
 							handleChangeVisibilityImage(album.id, img.id);
 						}}
-						isVisible={img.isVisible}
+						isVisible={img.isShown}
 					/>
 				))}
 

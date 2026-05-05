@@ -8,11 +8,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Images } from "@shared/ui/images";
 import { Button } from "@shared/ui/button";
 import { Icons } from "@shared/ui/icons";
+import { useState } from "react";
+import { PostCreateModal } from "../../@x/ui";
 
 export function HomeHeader() {
 	const { setToken, setUser } = useUserContext();
 	const pathname = usePathname();
-
+	const [visibleModal, SetVisibleModal] = useState<boolean>(false);
 	const router = useRouter();
 	return (
 		<SafeAreaView edges={["top"]} style={{ backgroundColor: COLORS.white }}>
@@ -23,7 +25,9 @@ export function HomeHeader() {
 						<Button
 							variant="outline"
 							iconLeft={<Icons.PlusIcon />}
-							onPress={() => {}}
+							onPress={() => {
+								SetVisibleModal(true);
+							}}
 						/>
 					)}
 
@@ -54,6 +58,12 @@ export function HomeHeader() {
 					/>
 				</View>
 			</View>
+			<PostCreateModal
+				visible={visibleModal}
+				onClose={() => {
+					SetVisibleModal(false)
+				}}
+			/>
 		</SafeAreaView>
 	);
 }

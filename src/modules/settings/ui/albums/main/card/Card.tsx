@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View } from "react-native";
 import { styles as stylesAlbum } from "../albumItem/album-item.styles";
 import { useEffect, useState } from "react";
 import { ModalCreateAlbum } from "../modalCreate/ModalCreateAlbum";
@@ -32,15 +32,16 @@ export function MainCard() {
 							/>
 						</View>
 					</View>
-					{data.map((album) => {
-						return (
+					<FlatList
+						data={data}
+						renderItem={({ item }) => (
 							<AlbumItem
-								key={album.id}
-								album={album}
+								key={item.id}
+								album={item}
 								refetch={getAlbums}
 							/>
-						);
-					})}
+						)}
+					/>
 				</>
 			) : (
 				<View style={stylesAlbum.container}>

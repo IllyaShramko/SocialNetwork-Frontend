@@ -25,8 +25,8 @@ export function ProfileCard() {
 	const [updateAvatar, { isLoading }] = useUpdateAvatarMutation();
 	const [update, { isLoading: isUpdating }] = useUpdateMutation();
 	const [avatarUrl, setAvatarUrl] = useState<string>(
-		user?.avatars.length !== 0 && user?.avatars[0]
-			? `http://${ENV.HOST}:${ENV.PORT}/media/thumb/${user.avatars[0].image.filename}`
+		user?.profile?.avatar
+			? `http://${ENV.HOST}:${ENV.PORT}/media/thumb/${user.profile?.avatar}`
 			: `http://${ENV.HOST}:${ENV.PORT}/media/original/default-avatar.jpg`,
 	);
 	const {
@@ -50,9 +50,9 @@ export function ProfileCard() {
 					avatar: data.avatar,
 				}).unwrap();
 				setUser(response);
-				console.log(response.avatars[0].image.filename);
+				console.log(response.profile?.avatar);
 				setAvatarUrl(
-					`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${response.avatars[0].image.filename}`,
+					`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${response.profile?.avatar}`,
 				);
 				setIsUpdatedAvatar(false);
 			} catch (error) {
@@ -70,7 +70,6 @@ export function ProfileCard() {
 			}
 		}
 	}
-		
 
 	return (
 		<View style={[styles.container, isEdit && styles.focus]}>
@@ -106,9 +105,7 @@ export function ProfileCard() {
 									</Text>
 								)}
 								<View style={styles.avatarBlock}>
-									<TouchableOpacity
-										disabled={!isEdit}
-									>
+									<TouchableOpacity disabled={!isEdit}>
 										<Image
 											style={styles.avatar}
 											source={{
@@ -189,7 +186,7 @@ export function ProfileCard() {
 				/>
 				<View>
 					<Text style={styles.surnameName}>
-						{user?.surname} {user?.firstName}
+						{user?.lastName} {user?.firstName}
 					</Text>
 				</View>
 				{isEdit ? (

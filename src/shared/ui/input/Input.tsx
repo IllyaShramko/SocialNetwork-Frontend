@@ -7,7 +7,6 @@ import {
 } from "./input.types";
 import { useState } from "react";
 import { Icons } from "../icons";
-import { COLORS } from "@shared/constants/colors";
 
 export function Input(props: InputProps) {
 	const {
