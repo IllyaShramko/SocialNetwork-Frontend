@@ -16,6 +16,8 @@ export function isApiError(error: unknown): error is ApiError {
 }
 
 export type User = {
+    nickname: ReactNode;
+    avatar: string | undefined;
 	id: number;
 	email: string;
 	username: string | null;
