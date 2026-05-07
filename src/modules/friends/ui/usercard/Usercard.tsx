@@ -13,7 +13,7 @@ export function UserCard({
 			<View style={styles.avatarWrapper}>
 				<Image
 					source={{
-						uri: user.avatar,
+						uri: user.avatarUrl,
 					}}
 					style={styles.avatar}
 				/>
@@ -26,7 +26,7 @@ export function UserCard({
 			</Text>
 
 			<Text style={styles.nickname}>
-				@{user.nickname}
+				@{user.firstName}
 			</Text>
 
 			<View style={styles.actions}>
