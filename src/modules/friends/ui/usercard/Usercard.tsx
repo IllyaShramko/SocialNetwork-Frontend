@@ -1,5 +1,5 @@
 import { Image, Text, View } from "react-native";
-import { styles } from "./Usercard.styles";
+import { styles } from "./usercard.styles";
 import { UserCardProps } from "./userСard.types";
 
 
@@ -12,11 +12,11 @@ export function UserCard({
 		<View style={styles.container}>
 			<View style={styles.avatarWrapper}>
 				<Image
-					source={{
-						uri: user.avatarUrl,
-					}}
-					style={styles.avatar}
-				/>
+	                    source={{
+		                    uri: user.profile?.avatar || "",
+	            }}
+	                style={styles.avatar}
+                />
 
 				<View style={styles.status} />
 			</View>

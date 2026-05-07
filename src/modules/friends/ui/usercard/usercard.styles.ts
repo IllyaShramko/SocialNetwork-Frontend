@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "@shared/constants/colors";
 
 export const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		alignItems: "center",
-		backgroundColor: "#FFFFFF",
+		backgroundColor: COLORS.white,
 		borderRadius: 28,
 		borderWidth: 1,
-		borderColor: "#E5E7EB",
+		borderColor: COLORS.white,
 		paddingVertical: 32,
 		paddingHorizontal: 24,
 	},
@@ -29,22 +30,22 @@ export const styles = StyleSheet.create({
 		width: 24,
 		height: 24,
 		borderRadius: 999,
-		backgroundColor: "#D4D4D8",
+		backgroundColor: COLORS.white,
 		borderWidth: 2,
-		borderColor: "#FFFFFF",
+		borderColor: COLORS.white,
 	},
 
 	username: {
 		marginTop: 20,
 		fontSize: 36,
 		fontWeight: "700",
-		color: "#0F172A",
+		color: COLORS.white,
 	},
 
 	nickname: {
 		marginTop: 8,
 		fontSize: 24,
-		color: "#737373",
+		color: COLORS.plum,
 	},
 
 	actions: {

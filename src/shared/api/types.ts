@@ -16,7 +16,6 @@ export function isApiError(error: unknown): error is ApiError {
 }
 
 export type User = {
-    avatarUrl: string | undefined;
 	id: number;
 	email: string;
 	username: string | null;
