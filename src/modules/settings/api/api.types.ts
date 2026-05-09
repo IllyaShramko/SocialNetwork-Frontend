@@ -6,11 +6,12 @@ export interface UpdateAvatarCredentials {
 export interface UpdateSignatureCredentials {
 	signature: string;
 }
-export interface UpdateUserProfileCredentaials {
+export interface UpdateUserProfileCredentials {
 	firstName?: string;
 	surname?: string;
 	email?: string;
 	username?: string;
+	pseudonym?: string;
 	birthday?: Date;
 }
 export interface UpdatePasswordCredentials {

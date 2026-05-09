@@ -21,7 +21,6 @@ export type User = {
 	username: string | null;
 	firstName: string | null;
 	lastName: string | null;
-	signature: string | null;
 	dateJoined: Date;
 	lastLogin: Date;
 	isSuperuser: boolean;
@@ -39,6 +38,31 @@ export type Profile = {
 	avatar: string | null;
 	is_image_signature: boolean;
 	is_text_signature: boolean;
+};
+
+export type UserWithoutProfile = {
+	id: number;
+	email: string;
+	username: string | null;
+	firstName: string | null;
+	lastName: string | null;
+	dateJoined: Date;
+	lastLogin: Date;
+	isSuperuser: boolean;
+	isStaff: boolean;
+	isActive: boolean;
+};
+
+export type ProfileWithUser = {
+	id: number;
+	signature: string | null;
+	userId: number;
+	birthDate: Date | null;
+	pseudonym: string | null;
+	avatar: string | null;
+	is_image_signature: boolean;
+	is_text_signature: boolean;
+	user: UserWithoutProfile;
 };
 
 // export type Avatar = {

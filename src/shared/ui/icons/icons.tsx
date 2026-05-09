@@ -1,3 +1,4 @@
+import { ArrowIcon } from "./_icons/Arrow";
 import { ChatsIcon } from "./_icons/Chats";
 import { CheckBoxIcon } from "./_icons/CheckBox";
 import { CloseIcon } from "./_icons/Close";
@@ -33,5 +34,6 @@ export const Icons = {
 	DeleteIcon,
 	SendIcon,
 	HeartIcon,
-	LikeIcon
+	LikeIcon,
+	ArrowIcon,
 };

@@ -31,8 +31,9 @@ export function FirstEnterModal({ isVisible, onClose }: ModalProps) {
 		try {
 			const response = await updateUser({
 				username: cleanUsername,
+				pseudonym: cleanPseyudonim,
 			}).unwrap();
-            setUser(response)
+			setUser(response);
 			onClose();
 		} catch (err) {
 			onClose();

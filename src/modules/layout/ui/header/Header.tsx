@@ -21,7 +21,7 @@ export function HomeHeader() {
 			<View style={styles.header}>
 				<Images.LogoImage style={styles.logo} />
 				<View style={styles.blockButtons}>
-					{!pathname.includes("/friends") && (
+					{(!pathname.includes("/friends") && !pathname.includes("/profile-page")) && (
 						<Button
 							variant="outline"
 							iconLeft={<Icons.PlusIcon />}

@@ -14,7 +14,6 @@ export function PostItem(props: PostItemProps) {
 
 	const layout = [row1, row2, row3].filter((row) => row.length > 0);
 
-	console.log(layout);
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
@@ -29,11 +28,11 @@ export function PostItem(props: PostItemProps) {
 							style={styles.avatar}
 						/>
 					</View>
-					<Text style={styles.username}>{post.author.username}</Text>
+					<Text style={styles.username}>{post.author.profile?.pseudonym}</Text>
 				</View>
-				{post.author.signature && (
+				{post.author.profile?.signature && (
 					<View>
-						<Image source={post.author.signature} />
+						<Image source={`http://${ENV.HOST}:${ENV.PORT}/media/original/${post.author.profile?.signature}.jpg`} />
 					</View>
 				)}
 			</View>
@@ -52,8 +51,8 @@ export function PostItem(props: PostItemProps) {
 								key={`post${index}`}
 								style={styles.lineOfImages}
 							>
-								{row.map((image) => (
-									<View style={{ flex: 1 }}>
+								{row.map((image, index) => (
+									<View key={`img${index}`} style={{ flex: 1 }}>
 										<Image
 											style={{
 												flex: 1,

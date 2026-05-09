@@ -11,7 +11,7 @@ import {
 	UpdateAvatarCredentials,
 	UpdatePasswordCredentials,
 	UpdateSignatureCredentials,
-	UpdateUserProfileCredentaials,
+	UpdateUserProfileCredentials,
 	UploadImagesArgs,
 } from "./api.types";
 import { Tag, User } from "@shared/api/types";
@@ -56,7 +56,7 @@ const settingsApi = baseApi
 						};
 					},
 				}),
-				update: builder.mutation<User, UpdateUserProfileCredentaials>({
+				update: builder.mutation<User, UpdateUserProfileCredentials>({
 					query: (body) => ({
 						url: "/users/me/profile",
 						body,

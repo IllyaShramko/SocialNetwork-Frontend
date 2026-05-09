@@ -3,12 +3,13 @@ import {
 	UserContextProvider,
 	useUserContext,
 } from "@modules/auth/context/user.context";
+import { SelectedProfileContextProvider } from "@modules/friends";
 import { NewPasswordContextProvider } from "@modules/settings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ApiProvider } from "@reduxjs/toolkit/query/react";
 import { baseApi } from "@shared/api/base-api";
 import { useFonts } from "expo-font";
-import { Slot, SplashScreen } from "expo-router";
+import { Slot, SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -21,9 +22,11 @@ export default function RootLayout() {
 			<ApiProvider api={baseApi}>
 				<UserContextProvider>
 					<NewPasswordContextProvider>
-						<KeyboardProvider>
-							<AppStack />
-						</KeyboardProvider>
+						<SelectedProfileContextProvider>
+							<KeyboardProvider>
+								<AppStack />
+							</KeyboardProvider>
+						</SelectedProfileContextProvider>
 					</NewPasswordContextProvider>
 				</UserContextProvider>
 			</ApiProvider>
@@ -77,6 +80,20 @@ function AppStack() {
 	if (!loaded && !error) {
 		return null;
 	}
-
-	return <Slot />;
+	return (
+		<Stack
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen name="(auth)" />
+			<Stack.Screen name="(main)" />
+			<Stack.Screen
+				name="(modals)"
+				options={{
+					presentation: "modal",
+				}}
+			/>
+		</Stack>
+	);
 }
