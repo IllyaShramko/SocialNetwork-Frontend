@@ -10,32 +10,45 @@ export function Card(props: CardProps) {
 	const { children, profile, status } = props;
 	const { setStatus, setUser } = useSelectedProfileContext();
 	const router = useRouter();
-	async function handleClick() {
+	function handleClick() {
 		console.log("Clicked on user with profile id: ", profile.id);
-		router.push("/profile-page/profile");
+
 		setStatus(status);
 		setUser(profile);
+
+		router.push("/profile-page/profile");
 	}
+
 	return (
-		<TouchableOpacity onPressOut={handleClick} style={styles.card}>
-			<View style={styles.body}>
-				<View style={styles.avatar}>
-					<Image
-						source={
-							profile.avatar
-								? `http://${ENV.HOST}:${ENV.PORT}/media/thumb/${profile.avatar}`
-								: `http://${ENV.HOST}:${ENV.PORT}/media/original/default-avatar.jpg`
-						}
-						style={styles.avatarImg}
-					/>
-					<View style={[styles.indicator, styles.inactive]} />
+		<View style={styles.card}>
+			<TouchableOpacity onPress={handleClick}>
+				<View style={styles.body}>
+					<View style={styles.avatar}>
+						<Image
+							source={
+								profile.avatar
+									? `http://${ENV.HOST}:${ENV.PORT}/media/thumb/${profile.avatar}`
+									: `http://${ENV.HOST}:${ENV.PORT}/media/original/default-avatar.jpg`
+							}
+							style={styles.avatarImg}
+						/>
+
+						<View style={[styles.indicator, styles.inactive]} />
+					</View>
+
+					<View style={styles.textsInfo}>
+						<Text style={styles.pseudonym}>
+							{profile.pseudonym}
+						</Text>
+
+						<Text style={styles.username}>
+							{profile.user.username}
+						</Text>
+					</View>
 				</View>
-				<View style={styles.textsInfo}>
-					<Text style={styles.pseudonym}>{profile.pseudonym}</Text>
-					<Text style={styles.username}>{profile.user.username}</Text>
-				</View>
-			</View>
+			</TouchableOpacity>
+
 			{children}
-		</TouchableOpacity>
+		</View>
 	);
 }

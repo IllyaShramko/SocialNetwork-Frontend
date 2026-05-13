@@ -57,18 +57,18 @@ export function Container(props: ContainerProps) {
 					children={
 						name === "Reqs" ? (
 							<View style={styles.btns}>
-								<Button variant="fill" text="Підтвердити" />
-								<Button variant="outline" text="Видалити" />
+								<Button variant="fill" onPress={() => {}} text="Підтвердити" />
+								<Button variant="outline" onPress={() => {}} text="Видалити" />
 							</View>
 						) : name === "Recs" ? (
 							<View style={styles.btns}>
-								<Button variant="fill" text="Додати" />
-								<Button variant="outline" text="Видалити" />
+								<Button variant="fill" onPress={() => {}} text="Додати" />
+								<Button variant="outline" onPress={() => {}} text="Видалити" />
 							</View>
 						) : (
 							<View style={styles.btns}>
-								<Button variant="fill" text="Повідомлення" />
-								<Button variant="outline" text="Видалити" />
+								<Button variant="fill"  onPress={() => {}} text="Повідомлення" />
+								<Button variant="outline" onPress={() => {}}	 text="Видалити" />
 							</View>
 						)
 					}
