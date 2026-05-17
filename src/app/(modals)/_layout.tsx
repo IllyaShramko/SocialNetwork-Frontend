@@ -9,7 +9,7 @@ export default function ModalLayout() {
 			}}
 		>
 			<Stack.Screen
-				name="profile-page/profile"
+				name="profile-page/[id]/index"
 				options={{
 					header: () => <HomeHeader />,
 					animation: "slide_from_bottom",

@@ -2,7 +2,7 @@ export {
 	useGetForYouRecsQuery,
 	useGetFriendsQuery,
 	useGetRequestsQuery,
-	useGetUserByIdQuery,
+	useGetProfileByIdQuery,
 	usePostAcceptRequestMutation,
 	usePostAddRequestMutation,
 	usePostDeclineRequestMutation,

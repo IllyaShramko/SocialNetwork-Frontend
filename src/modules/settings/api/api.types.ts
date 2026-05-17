@@ -32,21 +32,6 @@ export interface CodeGenerateCredentials {
 export interface CodeGenerateResponse {
 	message: string;
 }
-export type Album = {
-	id: number;
-	year: number;
-	name: string;
-	images: Image[];
-	theme: string;
-	topicId: number;
-	userId: number;
-};
-export type Image = {
-	id: number;
-	image: string;
-	isShown: boolean;
-	albumId: number;
-};
 export interface AlbumCredentials {
 	name: string;
 	topicId: number;

@@ -65,6 +65,26 @@ export type ProfileWithUser = {
 	user: UserWithoutProfile;
 };
 
+export type ProfileWithFullInfo = {
+	albums: Album;
+} & ProfileWithUser;
+
+export type Album = {
+	id: number;
+	year: number;
+	name: string;
+	images: AlbumImage[];
+	theme: string;
+	topicId: number;
+	userId: number;
+};
+
+export type AlbumImage = {
+	id: number;
+	image: string;
+	isShown: boolean;
+	albumId: number;
+};
 // export type Avatar = {
 // 	image: Image;
 // 	id: number;

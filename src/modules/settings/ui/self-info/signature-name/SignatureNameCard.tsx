@@ -82,7 +82,7 @@ export function SignatureNameCard() {
 						</Text>
 					</View>
 					<Text style={styles.bodyText}>
-						{user?.surname} {user?.firstName}
+						{user?.profile?.pseudonym}
 					</Text>
 				</View>
 				<Controller
@@ -109,16 +109,17 @@ export function SignatureNameCard() {
 										isEdit && styles.signatureContainerEdit,
 									]}
 								>
-									{user?.signature ? (
+									{user?.profile?.signature ? (
 										<Image
 											source={{
-												uri: `http://${ENV.HOST}:${ENV.PORT}/media/original/${user.signature}`,
+												uri: `http://${ENV.HOST}:${ENV.PORT}/media/original/${user.profile.signature}`,
 											}}
 											style={styles.signatureImage}
 										/>
 									) : (
 										<Text style={styles.bodyText}>
-											Підпис відсутній {user?.signature}
+											Підпис відсутній{" "}
+											{user?.profile?.signature}
 										</Text>
 									)}
 								</View>

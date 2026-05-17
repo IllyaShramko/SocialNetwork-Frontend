@@ -1,12 +1,10 @@
 import { baseApi } from "@shared/api/base-api";
 import {
-	Album,
 	AlbumCredentials,
 	AlbumUpdateCredentials,
 	CodeGenerateCredentials,
 	CodeGenerateResponse,
 	DeleteArgs,
-	Image,
 	MutationImageArgs,
 	UpdateAvatarCredentials,
 	UpdatePasswordCredentials,
@@ -14,7 +12,7 @@ import {
 	UpdateUserProfileCredentials,
 	UploadImagesArgs,
 } from "./api.types";
-import { Tag, User } from "@shared/api/types";
+import { Album, AlbumImage as Image, Tag, User } from "@shared/api/types";
 
 const settingsApi = baseApi
 	.enhanceEndpoints({ addTagTypes: ["Albums"] })
@@ -29,7 +27,7 @@ const settingsApi = baseApi
 							name: `${Date.now()}.jpeg`,
 							type: "image/jpeg",
 						} as any);
-						console.log(body.avatar)
+						console.log(body.avatar);
 						return {
 							url: "/users/me/avatar",
 							body: form,
@@ -161,14 +159,16 @@ const settingsApi = baseApi
 						};
 					},
 				}),
-				deleteAvatar: builder.mutation<{ success: string }, DeleteArgs>({
-					query({ id }) {
-						return {
-							url: `/users/me/avatars/${id}`,
-							method: "DELETE"
-						}
+				deleteAvatar: builder.mutation<{ success: string }, DeleteArgs>(
+					{
+						query({ id }) {
+							return {
+								url: `/users/me/avatars/${id}`,
+								method: "DELETE",
+							};
+						},
 					},
-				})
+				),
 			};
 		},
 	});
@@ -187,5 +187,5 @@ export const {
 	useChangeVisibilityImageMutation,
 	useAlbumUpdateMutation,
 	useAlbumDeleteMutation,
-	useDeleteAvatarMutation
+	useDeleteAvatarMutation,
 } = settingsApi;

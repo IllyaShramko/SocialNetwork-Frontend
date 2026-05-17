@@ -4,11 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreateAlbumT } from "@modules/settings/models/types";
 import { createAlbumValidator } from "@modules/settings/models/validators";
-import {
-	useAlbumCreateMutation,
-	useAlbumUpdateMutation,
-	useTagsQuery,
-} from "@modules/settings/api";
+import { useAlbumUpdateMutation, useTagsQuery } from "@modules/settings/api";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "./modal.styles";
 import { Button } from "@shared/ui/button";

@@ -1,23 +1,30 @@
 import { baseApi } from "@shared/api/base-api";
-import { Friend, FriendRequestResponse, Profile, SmthWithIdInPath } from "./api.types";
+import {
+	Friend,
+	FriendRequest,
+	ShortFriend,
+	ShortRequest,
+	SmthWithIdInPath,
+} from "./api.types";
+import { ProfileWithFullInfo, ProfileWithUser } from "@shared/api/types";
 
 const friendsApi = baseApi
 	.enhanceEndpoints({ addTagTypes: ["Requests", "ForYouRecs", "Friends"] })
 	.injectEndpoints({
 		endpoints(builder) {
 			return {
-				getRequests: builder.query<FriendRequestResponse[], void>({
+				getRequests: builder.query<FriendRequest[], void>({
 					query() {
 						return {
-							url: "/users/me/friends/requests",
+							url: "/friends/req",
 						};
 					},
 					providesTags: ["Requests"],
 				}),
-				getForYouRecs: builder.query<Profile[], void>({
+				getForYouRecs: builder.query<ProfileWithUser[], void>({
 					query() {
 						return {
-							url: "/users/me/friends/recs",
+							url: "/friends/all",
 						};
 					},
 					providesTags: ["ForYouRecs"],
@@ -25,51 +32,63 @@ const friendsApi = baseApi
 				getFriends: builder.query<Friend[], void>({
 					query() {
 						return {
-							url: "/users/me/friends",
+							url: "/friends/my",
 						};
 					},
 					providesTags: ["Friends"],
 				}),
-				postAddRequest: builder.mutation<Profile, SmthWithIdInPath>({
-					query(id) {
+				postAddRequest: builder.mutation<ShortFriend, SmthWithIdInPath>(
+					{
+						query({ id }) {
+							return {
+								url: `/friends/all/${id}`,
+								method: "POST",
+							};
+						},
+						invalidatesTags: ["Requests", "ForYouRecs"],
+					},
+				),
+				postAcceptRequest: builder.mutation<
+					ShortRequest,
+					SmthWithIdInPath
+				>({
+					query({ id }) {
 						return {
-							url: `/users/me/friends/request/${id}`,
+							url: `/friends/req/${id}`,
 							method: "POST",
 						};
 					},
-					invalidatesTags: ["Requests"],
+					invalidatesTags: ["Requests", "Friends"],
 				}),
-				postAcceptRequest: builder.mutation<Profile, SmthWithIdInPath>({
-					query(id) {
+				postDeclineRequest: builder.mutation<
+					ShortRequest,
+					SmthWithIdInPath
+				>({
+					query({ id }) {
 						return {
-							url: `/users/me/friends/request/${id}`,
-							method: "PUT",
-						};
-					},
-					invalidatesTags: ["Requests"],
-				}),
-				postDeclineRequest: builder.mutation<Profile, SmthWithIdInPath>(
-					{
-						query(id) {
-							return {
-								url: `/users/me/friends/request/${id}`,
-								method: "DELETE",
-							};
-						},
-						invalidatesTags: ["Requests"],
-					},
-				),
-				postDeleteFriend: builder.mutation<Profile, SmthWithIdInPath>({
-					query(id) {
-						return {
-							url: `/users/me/friends/${id}`,
+							url: `/friends/req/${id}`,
 							method: "DELETE",
 						};
 					},
-					invalidatesTags: ["Requests"],
+					invalidatesTags: ["Requests", "ForYouRecs"],
 				}),
-				getUserById: builder.query<Profile, SmthWithIdInPath>({
-					query(id) {
+				postDeleteFriend: builder.mutation<
+					ShortFriend,
+					SmthWithIdInPath
+				>({
+					query({ id }) {
+						return {
+							url: `/friends/my/${id}`,
+							method: "DELETE",
+						};
+					},
+					invalidatesTags: ["Friends", "ForYouRecs"],
+				}),
+				getProfileById: builder.query<
+					ProfileWithFullInfo,
+					SmthWithIdInPath
+				>({
+					query({ id }) {
 						return {
 							url: `/users/${id}`,
 							method: "GET",
@@ -84,7 +103,7 @@ export const {
 	useGetForYouRecsQuery,
 	useGetFriendsQuery,
 	useGetRequestsQuery,
-	useGetUserByIdQuery,
+	useGetProfileByIdQuery,
 	usePostAcceptRequestMutation,
 	usePostAddRequestMutation,
 	usePostDeclineRequestMutation,

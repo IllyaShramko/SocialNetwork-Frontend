@@ -3,6 +3,6 @@ export type PostCreateDto = {
 	topic: string;
 	content: string;
 	tagIds?: number[];
-	images?: string[];
+	images?: { uri: string }[];
 	links?: string[];
 };

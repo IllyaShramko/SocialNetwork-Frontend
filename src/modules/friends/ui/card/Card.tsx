@@ -8,17 +8,20 @@ import { useSelectedProfileContext } from "@modules/friends/context/friends.cont
 
 export function Card(props: CardProps) {
 	const { children, profile, status } = props;
-	const { setStatus, setUser } = useSelectedProfileContext();
+	const { setStatus } = useSelectedProfileContext();
 	const router = useRouter();
 	async function handleClick() {
-		console.log("Clicked on user with profile id: ", profile.id);
-		router.push("/profile-page/profile");
+		// console.log("Clicked on user with profile id: ", profile.id);
+
 		setStatus(status);
-		setUser(profile);
+		router.push({
+			pathname: "/profile-page/[id]",
+			params: { id: profile.id },
+		});
 	}
 	return (
-		<TouchableOpacity onPressOut={handleClick} style={styles.card}>
-			<View style={styles.body}>
+		<View style={styles.card}>
+			<TouchableOpacity onPress={handleClick} style={styles.body}>
 				<View style={styles.avatar}>
 					<Image
 						source={
@@ -32,10 +35,10 @@ export function Card(props: CardProps) {
 				</View>
 				<View style={styles.textsInfo}>
 					<Text style={styles.pseudonym}>{profile.pseudonym}</Text>
-					<Text style={styles.username}>{profile.user.username}</Text>
+					<Text style={styles.username}>@{profile.user.username}</Text>
 				</View>
-			</View>
+			</TouchableOpacity>
 			{children}
-		</TouchableOpacity>
+		</View>
 	);
 }

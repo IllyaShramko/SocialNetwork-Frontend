@@ -26,7 +26,6 @@ const postApi = baseApi
 				createPost: builder.mutation<Post, PostCreateDto>({
 					query(body) {
 						const form = new FormData();
-						console.log(body)
 						form.append("title", body.title);
 						form.append("topic", body.topic);
 						form.append("content", body.content);
@@ -34,10 +33,9 @@ const postApi = baseApi
 							form.append("tagIds", `${tag}`);
 						});
 
-						body.images?.forEach((image) => {
-							console.log(image, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+						body.images?.forEach(({ uri }) => {
 							form.append("images", {
-								uri: image,
+								uri,
 								name: `${Date.now()}.jpeg`,
 								type: "image/jpeg",
 							} as any);

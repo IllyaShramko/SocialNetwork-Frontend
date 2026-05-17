@@ -3,9 +3,9 @@ import { Redirect } from "expo-router";
 
 export default function Page() {
 	const { token } = useUserContext();
-	
+
 	if (token) {
-        return <Redirect href={{pathname: "/(main)"}} />;
+		return <Redirect href={{ pathname: "/(main)" }} />;
 	}
-    return <Redirect href={"/login"} />;
+	return <Redirect href={"/login"} />;
 }

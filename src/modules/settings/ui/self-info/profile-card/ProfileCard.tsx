@@ -186,7 +186,7 @@ export function ProfileCard() {
 				/>
 				<View>
 					<Text style={styles.surnameName}>
-						{user?.lastName} {user?.firstName}
+						{user?.profile?.pseudonym}
 					</Text>
 				</View>
 				{isEdit ? (
