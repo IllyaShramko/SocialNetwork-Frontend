@@ -31,7 +31,7 @@ export function ModalCreateAlbum(props: ModalCreateAlbumProps) {
 		mode: "onChange",
 		defaultValues: {
 			name: undefined,
-			topicId: undefined,
+			theme: undefined,
 			year: undefined,
 		},
 	});
@@ -97,58 +97,23 @@ export function ModalCreateAlbum(props: ModalCreateAlbumProps) {
 								}}
 							/>
 							<Controller
-								name="topicId"
+								name="theme"
 								control={control}
 								rules={{ required: true }}
-								render={({
-									field: { onChange, value, onBlur },
-								}) => {
-									const options = Array.isArray(data)
-										? data.map((tag) => ({
-												value: tag.id,
-												label: tag.name,
-											}))
-										: [];
+								render={({ field, fieldState }) => {
 									return (
-										<View style={styles.selectView}>
-											<Text style={styles.selectedText}>
-												Оберіть тему
-											</Text>
-											<Dropdown
-												style={[styles.dropdown]}
-												placeholderStyle={
-													styles.placeholder
-												}
-												selectedTextStyle={
-													styles.selectedText
-												}
-												inputSearchStyle={
-													styles.inputSearch
-												}
-												containerStyle={{
-													marginTop:
-														Platform.OS ===
-														"android"
-															? -30
-															: 0,
-												}}
-												data={options}
-												dropdownPosition="bottom"
-												search
-												maxHeight={300}
-												labelField="label"
-												valueField="value"
-												placeholder="Оберіть тему"
-												searchPlaceholder="Пошук..."
-												value={value}
-												onBlur={() => {
-													onBlur();
-												}}
-												onChange={(item) => {
-													onChange(item.value);
-												}}
-											/>
-										</View>
+										<Input
+											placeholder="Введіть тему"
+											inputMode="text"
+											autoCapitalize="none"
+											autoComplete="off"
+											autoCorrect={false}
+											onChangeText={field.onChange}
+											value={field.value}
+											label="Тема альбому"
+											error={fieldState.error?.message}
+											accessable={true}
+										/>
 									);
 								}}
 							/>

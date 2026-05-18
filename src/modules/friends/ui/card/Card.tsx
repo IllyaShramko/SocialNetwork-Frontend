@@ -11,8 +11,6 @@ export function Card(props: CardProps) {
 	const { setStatus } = useSelectedProfileContext();
 	const router = useRouter();
 	async function handleClick() {
-		// console.log("Clicked on user with profile id: ", profile.id);
-
 		setStatus(status);
 		router.push({
 			pathname: "/profile-page/[id]",
@@ -35,7 +33,9 @@ export function Card(props: CardProps) {
 				</View>
 				<View style={styles.textsInfo}>
 					<Text style={styles.pseudonym}>{profile.pseudonym}</Text>
-					<Text style={styles.username}>@{profile.user.username}</Text>
+					<Text style={styles.username}>
+						@{profile.user.username}
+					</Text>
 				</View>
 			</TouchableOpacity>
 			{children}

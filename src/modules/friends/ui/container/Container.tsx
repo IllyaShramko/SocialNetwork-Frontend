@@ -30,8 +30,9 @@ export function Container(props: ContainerProps) {
 				)}
 			</View>
 			<View style={styles.body}>
-				{redirectTo
-					? profiles?.slice(0, 2).map((profile) => (
+				{profiles && profiles.length !== 0 ? (
+					redirectTo ? (
+						profiles?.slice(0, 2).map((profile) => (
 							<Card
 								key={profile.id}
 								profile={profile}
@@ -74,7 +75,8 @@ export function Container(props: ContainerProps) {
 								}
 							/>
 						))
-					: profiles?.map((profile) => (
+					) : (
+						profiles?.map((profile) => (
 							<Card
 								key={profile.id}
 								profile={profile}
@@ -116,7 +118,13 @@ export function Container(props: ContainerProps) {
 									)
 								}
 							/>
-						))}
+						))
+					)
+				) : (
+					<Text style={styles.placeholderText}>
+						Тут поки що нічого немає...
+					</Text>
+				)}
 			</View>
 		</View>
 	);

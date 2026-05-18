@@ -6,7 +6,7 @@ import {
 	ShortRequest,
 	SmthWithIdInPath,
 } from "./api.types";
-import { ProfileWithFullInfo, ProfileWithUser } from "@shared/api/types";
+import { Post, ProfileWithFullInfo, ProfileWithUser } from "@shared/api/types";
 
 const friendsApi = baseApi
 	.enhanceEndpoints({ addTagTypes: ["Requests", "ForYouRecs", "Friends"] })
@@ -95,6 +95,14 @@ const friendsApi = baseApi
 						};
 					},
 				}),
+				getPostsByUserId: builder.query<Post[], SmthWithIdInPath>({
+					query({ id }) {
+						return {
+							url: `/posts?userId=${id}`,
+							method: "GET",
+						};
+					},
+				}),
 			};
 		},
 	});
@@ -108,4 +116,5 @@ export const {
 	usePostAddRequestMutation,
 	usePostDeclineRequestMutation,
 	usePostDeleteFriendMutation,
+	useGetPostsByUserIdQuery,
 } = friendsApi;

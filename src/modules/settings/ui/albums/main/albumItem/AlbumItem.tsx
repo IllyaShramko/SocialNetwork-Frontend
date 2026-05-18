@@ -55,7 +55,6 @@ export function AlbumItem(props: AlbumProps) {
 				albumId: albumId,
 				images: cleanData,
 			}).unwrap();
-			console.log("gefefe")
 			refetch();
 
 			setTempImages((prev) =>

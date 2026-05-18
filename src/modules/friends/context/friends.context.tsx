@@ -1,4 +1,3 @@
-import { ProfileWithFullInfo } from "@shared/api/types";
 import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 interface SelectedProfileContextContract {

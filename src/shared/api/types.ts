@@ -66,7 +66,7 @@ export type ProfileWithUser = {
 };
 
 export type ProfileWithFullInfo = {
-	albums: Album;
+	albums: Album[];
 } & ProfileWithUser;
 
 export type Album = {

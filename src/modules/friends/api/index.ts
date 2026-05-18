@@ -7,4 +7,5 @@ export {
 	usePostAddRequestMutation,
 	usePostDeclineRequestMutation,
 	usePostDeleteFriendMutation,
+	useGetPostsByUserIdQuery,
 } from "./friends-api";

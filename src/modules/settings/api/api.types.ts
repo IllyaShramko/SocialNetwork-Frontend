@@ -34,13 +34,13 @@ export interface CodeGenerateResponse {
 }
 export interface AlbumCredentials {
 	name: string;
-	topicId: number;
+	theme: string;
 	year: number;
 }
 export interface AlbumUpdateCredentials {
 	id: number;
 	name: string;
-	topicId: number;
+	theme: string;
 	year: number;
 }
 

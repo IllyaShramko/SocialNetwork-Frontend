@@ -26,13 +26,18 @@ export const styles = StyleSheet.create({
 		color: COLORS.plum,
 		fontFamily: typography.medium.fontFamily,
 		fontSize: 16,
-    },
+	},
 	body: {
-        gap: 8
-    },
+		gap: 8,
+	},
 	btns: {
-        flexDirection: "row",
-        justifyContent: "center",
-        gap: 16
-    },
+		flexDirection: "row",
+		justifyContent: "center",
+		gap: 16,
+	},
+	placeholderText: {
+		fontSize: 16,
+		textAlign: "center",
+		fontFamily: typography.medium.fontFamily,
+	},
 });

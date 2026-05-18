@@ -3,7 +3,9 @@ import { typography } from "@shared/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-	container: {},
+	container: {
+		gap: 8,
+	},
 	headerContainer: {
 		padding: 16,
 		gap: 16,
@@ -91,5 +93,77 @@ export const styles = StyleSheet.create({
 		height: 48,
 		width: 1,
 		backgroundColor: COLORS.blue20,
+	},
+	albumContainer: {
+		padding: 16,
+		gap: 16,
+		backgroundColor: COLORS.white,
+		borderWidth: 1,
+		borderColor: COLORS.blue20,
+		borderRadius: 10,
+	},
+	albumHeader: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+	},
+	albumTitleImg: {
+		flexDirection: "row",
+		gap: 8,
+		alignItems: "center",
+	},
+	albumTitleHeader: {
+		fontSize: 20,
+		fontFamily: typography.medium.fontFamily,
+		color: COLORS.blue50,
+	},
+	btnSeeMore: {
+		fontSize: 16,
+		fontFamily: typography.medium.fontFamily,
+		color: COLORS.plum,
+	},
+	btnDisabled: {
+		color: COLORS.blue20,
+	},
+	hrHorizontal: {
+		width: "100%",
+		height: 1,
+		backgroundColor: COLORS.blue20,
+	},
+	album: {
+		width: "100%",
+		gap: 10,
+	},
+	albumName: {
+		fontSize: 16,
+		color: COLORS.blue,
+		fontFamily: typography.medium.fontFamily,
+	},
+	albumThemeAndYear: {
+		flexDirection: "row",
+		gap: 16,
+		alignItems: "center",
+	},
+	albumTheme: {
+		fontSize: 16,
+		color: COLORS.blue,
+		fontFamily: typography.regular.fontFamily,
+	},
+	albumYear: {
+		fontSize: 16,
+		color: COLORS.blue50,
+		fontFamily: typography.regular.fontFamily,
+	},
+	imgs: {
+		width: "100%",
+		gap: 8,
+	},
+	image: {
+		width: "100%",
+		height: 162,
+		borderRadius: 10,
+	},
+	posts: {
+		gap: 8,
 	},
 });
