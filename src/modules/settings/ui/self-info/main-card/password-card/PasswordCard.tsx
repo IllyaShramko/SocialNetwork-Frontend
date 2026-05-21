@@ -36,10 +36,7 @@ export function PasswordCard({ setGlobalEdit }: PasswordCardProps) {
 	});
 
 	async function onSubmit(data: PasswordCardT) {
-		console.log("Збереження даних профілю:", data);
-		if (!user) {
-			return;
-		}
+		if (!user) return;
 		try {
 			const response = await generateCode({ email: user.email }).unwrap();
 			setNewPassword(data.password);

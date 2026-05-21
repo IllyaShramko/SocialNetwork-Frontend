@@ -44,13 +44,11 @@ export function ProfileCard() {
 
 	async function onSubmit(data: ProfileCardT) {
 		if (data.avatar !== undefined && data.avatar && isUpdatedAvatar) {
-			console.log(data);
 			try {
 				const response = await updateAvatar({
 					avatar: data.avatar,
 				}).unwrap();
 				setUser(response);
-				console.log(response.profile?.avatar);
 				setAvatarUrl(
 					`http://${ENV.HOST}:${ENV.PORT}/media/thumb/${response.profile?.avatar}`,
 				);

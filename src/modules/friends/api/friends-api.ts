@@ -1,12 +1,11 @@
 import { baseApi } from "@shared/api/base-api";
 import {
-	Friend,
 	FriendRequest,
-	ShortFriend,
-	ShortRequest,
+	PostsByUserIdParams,
+	ShortFriendShip,
 	SmthWithIdInPath,
 } from "./api.types";
-import { Post, ProfileWithFullInfo, ProfileWithUser } from "@shared/api/types";
+import { Friend, Post, ProfileWithFullInfo, User } from "@shared/api/types";
 
 const friendsApi = baseApi
 	.enhanceEndpoints({ addTagTypes: ["Requests", "ForYouRecs", "Friends"] })
@@ -21,7 +20,7 @@ const friendsApi = baseApi
 					},
 					providesTags: ["Requests"],
 				}),
-				getForYouRecs: builder.query<ProfileWithUser[], void>({
+				getForYouRecs: builder.query<User[], void>({
 					query() {
 						return {
 							url: "/friends/all",
@@ -37,19 +36,20 @@ const friendsApi = baseApi
 					},
 					providesTags: ["Friends"],
 				}),
-				postAddRequest: builder.mutation<ShortFriend, SmthWithIdInPath>(
-					{
-						query({ id }) {
-							return {
-								url: `/friends/all/${id}`,
-								method: "POST",
-							};
-						},
-						invalidatesTags: ["Requests", "ForYouRecs"],
+				postAddRequest: builder.mutation<
+					ShortFriendShip,
+					SmthWithIdInPath
+				>({
+					query({ id }) {
+						return {
+							url: `/friends/all/${id}`,
+							method: "POST",
+						};
 					},
-				),
+					invalidatesTags: ["Requests", "ForYouRecs"],
+				}),
 				postAcceptRequest: builder.mutation<
-					ShortRequest,
+					ShortFriendShip,
 					SmthWithIdInPath
 				>({
 					query({ id }) {
@@ -61,7 +61,7 @@ const friendsApi = baseApi
 					invalidatesTags: ["Requests", "Friends"],
 				}),
 				postDeclineRequest: builder.mutation<
-					ShortRequest,
+					ShortFriendShip,
 					SmthWithIdInPath
 				>({
 					query({ id }) {
@@ -73,7 +73,7 @@ const friendsApi = baseApi
 					invalidatesTags: ["Requests", "ForYouRecs"],
 				}),
 				postDeleteFriend: builder.mutation<
-					ShortFriend,
+					ShortFriendShip,
 					SmthWithIdInPath
 				>({
 					query({ id }) {
@@ -95,12 +95,35 @@ const friendsApi = baseApi
 						};
 					},
 				}),
-				getPostsByUserId: builder.query<Post[], SmthWithIdInPath>({
-					query({ id }) {
+				getPostsByUserId: builder.query<Post[], PostsByUserIdParams>({
+					query({ id, page = 1, limit = 5 }) {
 						return {
-							url: `/posts?userId=${id}`,
+							url: `/posts?userId=${id}&pageNumber=${page}&limit=${limit}`,
 							method: "GET",
 						};
+					},
+					serializeQueryArgs: ({ endpointName, queryArgs }) =>
+						`${endpointName}-${queryArgs.id}`,
+					merge(currentCache, newItems, { arg }) {
+						if (arg.page == null || arg.page === 1) {
+							return newItems;
+						}
+
+						const existingIds = new Set(
+							currentCache.map((post) => post.id),
+						);
+						newItems.forEach((post) => {
+							if (!existingIds.has(post.id)) {
+								currentCache.push(post);
+							}
+						});
+					},
+					forceRefetch({ currentArg, previousArg }) {
+						return (
+							currentArg?.id !== previousArg?.id ||
+							currentArg?.page !== previousArg?.page ||
+							currentArg?.limit !== previousArg?.limit
+						);
 					},
 				}),
 			};

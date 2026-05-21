@@ -4,10 +4,19 @@ import { styles } from "./container.styles";
 import { useRouter } from "expo-router";
 import { Card } from "../card";
 import { Button } from "@shared/ui/button";
+import { useSelectedProfileContext } from "../../context/friends.context";
 
 export function Container(props: ContainerProps) {
 	const { name, redirectTo, profiles } = props;
+	const { setStatus } = useSelectedProfileContext();
 	const router = useRouter();
+	async function handleClick(id: number) {
+		setStatus(name);
+		router.push({
+			pathname: "/profile-page/[id]",
+			params: { id },
+		});
+	}
 
 	return (
 		<View style={styles.container}>
@@ -32,21 +41,26 @@ export function Container(props: ContainerProps) {
 			<View style={styles.body}>
 				{profiles && profiles.length !== 0 ? (
 					redirectTo ? (
-						profiles?.slice(0, 2).map((profile) => (
+						profiles?.slice(0, 2).map((user) => (
 							<Card
-								key={profile.id}
-								profile={profile}
-								status={name}
+								key={user.id}
+								user={user}
 								children={
 									name === "Reqs" ? (
 										<View style={styles.btns}>
 											<Button
 												variant="fill"
 												text="Підтвердити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 											<Button
 												variant="outline"
 												text="Видалити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 										</View>
 									) : name === "Recs" ? (
@@ -54,10 +68,16 @@ export function Container(props: ContainerProps) {
 											<Button
 												variant="fill"
 												text="Додати"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 											<Button
 												variant="outline"
 												text="Видалити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 										</View>
 									) : (
@@ -65,10 +85,16 @@ export function Container(props: ContainerProps) {
 											<Button
 												variant="fill"
 												text="Повідомлення"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 											<Button
 												variant="outline"
 												text="Видалити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 										</View>
 									)
@@ -76,21 +102,26 @@ export function Container(props: ContainerProps) {
 							/>
 						))
 					) : (
-						profiles?.map((profile) => (
+						profiles?.map((user) => (
 							<Card
-								key={profile.id}
-								profile={profile}
-								status={name}
+								key={user.id}
+								user={user}
 								children={
 									name === "Reqs" ? (
 										<View style={styles.btns}>
 											<Button
 												variant="fill"
 												text="Підтвердити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 											<Button
 												variant="outline"
 												text="Видалити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 										</View>
 									) : name === "Recs" ? (
@@ -98,10 +129,16 @@ export function Container(props: ContainerProps) {
 											<Button
 												variant="fill"
 												text="Додати"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 											<Button
 												variant="outline"
 												text="Видалити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 										</View>
 									) : (
@@ -109,10 +146,16 @@ export function Container(props: ContainerProps) {
 											<Button
 												variant="fill"
 												text="Повідомлення"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 											<Button
 												variant="outline"
 												text="Видалити"
+												onPress={() =>
+													handleClick(user.id)
+												}
 											/>
 										</View>
 									)

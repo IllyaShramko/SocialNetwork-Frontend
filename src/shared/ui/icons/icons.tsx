@@ -2,6 +2,7 @@ import { ArrowIcon } from "./_icons/Arrow";
 import { ChatsIcon } from "./_icons/Chats";
 import { CheckBoxIcon } from "./_icons/CheckBox";
 import { CloseIcon } from "./_icons/Close";
+import { DefaultGroupIcon } from "./_icons/DefaultGroup";
 import { DeleteIcon } from "./_icons/Delete";
 import { EditIcon } from "./_icons/Edit";
 import { EyeClosedIcon } from "./_icons/EyeClosed";
@@ -13,6 +14,7 @@ import { HomeIcon } from "./_icons/Home";
 import { LikeIcon } from "./_icons/Like";
 import { LogoutIcon } from "./_icons/Logout";
 import { PlusIcon } from "./_icons/Plus";
+import { SearchIcon } from "./_icons/Search";
 import { SendIcon } from "./_icons/Send";
 import { SettingsIcon } from "./_icons/Settings";
 import { threePointsIcon } from "./_icons/threePoints";
@@ -36,4 +38,6 @@ export const Icons = {
 	HeartIcon,
 	LikeIcon,
 	ArrowIcon,
+	SearchIcon,
+	DefaultGroupIcon,
 };

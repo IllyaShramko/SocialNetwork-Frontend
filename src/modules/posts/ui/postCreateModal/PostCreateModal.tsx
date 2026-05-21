@@ -47,7 +47,6 @@ export function PostCreateModal(props: ModalCreatePostProps) {
 			quality: 0.8,
 			selectionLimit: 7 - currentImages.length,
 		});
-		console.log(result);
 		if (result.status === "ok") {
 			const newImages = result.assets.map((asset) => ({
 				uri: asset.uri,
@@ -64,7 +63,6 @@ export function PostCreateModal(props: ModalCreatePostProps) {
 
 	const handleOnSubmit = async (data: postCreateType) => {
 		data.tagIds = selectedTagIds;
-		console.log(data);
 		try {
 			const response = await createPost(data as PostCreateDto).unwrap();
 			console.log(`response: \n${response}`);

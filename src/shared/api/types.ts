@@ -26,7 +26,7 @@ export type User = {
 	isSuperuser: boolean;
 	isStaff: boolean;
 	isActive: boolean;
-	profile: Profile | null;
+	profile: Profile;
 };
 
 export type Profile = {
@@ -75,7 +75,6 @@ export type Album = {
 	name: string;
 	images: AlbumImage[];
 	theme: string;
-	topicId: number;
 	userId: number;
 };
 
@@ -85,12 +84,6 @@ export type AlbumImage = {
 	isShown: boolean;
 	albumId: number;
 };
-// export type Avatar = {
-// 	image: Image;
-// 	id: number;
-// 	imageId: number;
-// 	userId: number;
-// };
 
 export type PostImage = {
 	id: number;
@@ -135,4 +128,12 @@ export type TagPost = {
 export type Tag = {
 	id: number;
 	name: string;
+};
+
+export type Friend = {
+	id: number;
+	fromUserId: number;
+	toUserId: number;
+	toUser: User;
+	fromUser: User;
 };

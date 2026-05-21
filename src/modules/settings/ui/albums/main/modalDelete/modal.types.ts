@@ -1,4 +1,4 @@
-import { Album } from "@modules/settings/api/api.types";
+import { Album } from "@shared/api/types";
 
 export type ModalUpdateAlbumProps = {
 	visible: boolean;

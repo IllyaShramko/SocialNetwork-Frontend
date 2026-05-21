@@ -15,7 +15,7 @@ export function MainCard() {
 	}, []);
 
 	return (
-		<ScrollView contentContainerStyle={{ flexGrow: 1, gap: 8 }}>
+		<View style={{ flexGrow: 1, gap: 8 }}>
 			{data && data.length !== 0 ? (
 				<>
 					<View style={stylesAlbum.container}>
@@ -66,6 +66,6 @@ export function MainCard() {
 					getAlbums();
 				}}
 			/>
-		</ScrollView>
+		</View>
 	);
 }

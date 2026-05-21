@@ -1,8 +1,7 @@
-import { ProfileWithUser } from "@shared/api/types";
-import { ViewProps } from "react-native";
+import { User } from "@shared/api/types";
 
 export interface ContainerProps {
     name: "Reqs" | "Recs" | "AllF"
-    profiles?: ProfileWithUser[],
+    profiles?: User[],
     redirectTo?: string
 }

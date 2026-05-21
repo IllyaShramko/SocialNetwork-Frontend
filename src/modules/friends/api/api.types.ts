@@ -1,35 +1,27 @@
-import type { Profile, ProfileWithUser } from "@shared/api/types";
+import type { Profile, User } from "@shared/api/types";
 export type { Profile };
 
 export interface SmthWithIdInPath {
 	id: number;
 }
 
+export interface PostsByUserIdParams extends SmthWithIdInPath {
+	page?: number;
+	limit?: number;
+}
+
 export type FriendRequest = {
 	id: number;
-	fromProfile: ProfileWithUser;
-	fromProfileId: number;
-	toProfileId: number;
+	fromUser: User;
+	fromUserId: number;
+	toUserId: number;
 	createdAt: Date;
 };
 
-export type Friend = {
+export type ShortFriendShip = {
 	id: number;
-	fromProfileId: number;
-	toProfileId: number;
-	toProfile: ProfileWithUser;
-	fromProfile: ProfileWithUser;
-};
-
-export type ShortFriend = {
-	id: number;
-	fromProfileId: number;
-	toProfileId: number;
-};
-
-export type ShortRequest = {
-	id: number;
-	fromProfileId: number;
-	toProfileId: number;
+	status: "pending" | "accepted";
+	fromUserId: number;
+	toUserId: number;
 	createdAt: Date;
 };

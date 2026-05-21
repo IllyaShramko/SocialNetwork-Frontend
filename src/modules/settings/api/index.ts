@@ -12,5 +12,4 @@ export {
 	useDeleteImageMutation,
 	useAlbumUpdateMutation,
 	useAlbumDeleteMutation,
-	useDeleteAvatarMutation,
 } from "./settings-api";

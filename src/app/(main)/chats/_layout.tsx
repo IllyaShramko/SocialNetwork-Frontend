@@ -30,7 +30,10 @@ export default function SettingsLayout() {
 				/>
 				<Link
 					text="Групові чати"
-					selected={pathname.includes("/groups")}
+					selected={
+						pathname.includes("/groups") ||
+						pathname.includes("/chats/chat")
+					}
 					icon={<Icons.ChatsIcon />}
 					onPress={() => {
 						!pathname.includes("/groups") &&

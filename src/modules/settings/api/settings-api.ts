@@ -124,7 +124,7 @@ const settingsApi = baseApi
 				uploadImages: builder.mutation<Image[], UploadImagesArgs>({
 					query: ({ albumId, images }) => {
 						const form = new FormData();
-
+						console.log(images)
 						images.forEach((uri, index) => {
 							form.append("images", {
 								uri: uri,
@@ -159,16 +159,6 @@ const settingsApi = baseApi
 						};
 					},
 				}),
-				deleteAvatar: builder.mutation<{ success: string }, DeleteArgs>(
-					{
-						query({ id }) {
-							return {
-								url: `/users/me/avatars/${id}`,
-								method: "DELETE",
-							};
-						},
-					},
-				),
 			};
 		},
 	});
@@ -187,5 +177,4 @@ export const {
 	useChangeVisibilityImageMutation,
 	useAlbumUpdateMutation,
 	useAlbumDeleteMutation,
-	useDeleteAvatarMutation,
 } = settingsApi;

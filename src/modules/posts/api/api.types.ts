@@ -6,3 +6,8 @@ export type PostCreateDto = {
 	images?: { uri: string }[];
 	links?: string[];
 };
+
+export type PostsPaginationParams = {
+	page?: number;
+	limit?: number;
+};

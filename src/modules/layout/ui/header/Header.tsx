@@ -31,7 +31,7 @@ export function HomeHeader() {
 						/>
 					)}
 
-					{!pathname.includes("/chats") && (
+					{(!pathname.includes("/chats") && !pathname.includes("/profile-page")) && (
 						<Button
 							variant="outline"
 							iconLeft={<Icons.SettingsIcon />}

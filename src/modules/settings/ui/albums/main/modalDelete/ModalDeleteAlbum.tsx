@@ -4,10 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CreateAlbumT } from "@modules/settings/models/types";
 import { createAlbumValidator } from "@modules/settings/models/validators";
-import {
-	useAlbumUpdateMutation,
-	useTagsQuery,
-} from "@modules/settings/api";
+import { useAlbumUpdateMutation, useTagsQuery } from "@modules/settings/api";
 import { Dropdown } from "react-native-element-dropdown";
 import { styles } from "./modal.styles";
 import { Button } from "@shared/ui/button";
@@ -25,7 +22,7 @@ export function ModalUpdateAlbum(props: ModalUpdateAlbumProps) {
 		mode: "onChange",
 		defaultValues: {
 			name: album.name,
-			topicId: album.topicId,
+			theme: album.theme,
 			year: album.year,
 		},
 	});
@@ -33,7 +30,7 @@ export function ModalUpdateAlbum(props: ModalUpdateAlbumProps) {
 		if (visible) {
 			reset({
 				name: album.name,
-				topicId: album.topicId,
+				theme: album.theme,
 				year: album.year,
 			});
 		}
@@ -102,58 +99,23 @@ export function ModalUpdateAlbum(props: ModalUpdateAlbumProps) {
 								}}
 							/>
 							<Controller
-								name="topicId"
+								name="theme"
 								control={control}
 								rules={{ required: true }}
-								render={({
-									field: { onChange, value, onBlur },
-								}) => {
-									const options = Array.isArray(data)
-										? data.map((tag) => ({
-												value: tag.id,
-												label: tag.name,
-											}))
-										: [];
+								render={({ field, fieldState }) => {
 									return (
-										<View style={styles.selectView}>
-											<Text style={styles.selectedText}>
-												Оберіть тему
-											</Text>
-											<Dropdown
-												style={[styles.dropdown]}
-												placeholderStyle={
-													styles.placeholder
-												}
-												selectedTextStyle={
-													styles.selectedText
-												}
-												inputSearchStyle={
-													styles.inputSearch
-												}
-												containerStyle={{
-													marginTop:
-														Platform.OS ===
-														"android"
-															? -30
-															: 0,
-												}}
-												data={options}
-												dropdownPosition="bottom"
-												search
-												maxHeight={300}
-												labelField="label"
-												valueField="value"
-												placeholder="Оберіть тему"
-												searchPlaceholder="Пошук..."
-												value={value}
-												onBlur={() => {
-													onBlur();
-												}}
-												onChange={(item) => {
-													onChange(item.value);
-												}}
-											/>
-										</View>
+										<Input
+											placeholder="Введіть тему"
+											inputMode="text"
+											autoCapitalize="none"
+											autoComplete="off"
+											autoCorrect={false}
+											onChangeText={field.onChange}
+											value={field.value}
+											label="Тема альбому"
+											error={fieldState.error?.message}
+											accessable={true}
+										/>
 									);
 								}}
 							/>
@@ -206,10 +168,9 @@ export function ModalUpdateAlbum(props: ModalUpdateAlbumProps) {
 												placeholder="Оберіть рік"
 												search
 												value={value?.toString()}
-												onChange={(item) => {
-													onChange(item.value);
-													console.log(item);
-												}}
+												onChange={(item) =>
+													onChange(item.value)
+												}
 											/>
 										</View>
 									);
