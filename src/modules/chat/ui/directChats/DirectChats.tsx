@@ -9,7 +9,7 @@ export function DirectChats() {
 	const { data, isLoading, isFetching } = useGetDirectsQuery();
 	return (
 		<MainContainer<DirectPreviewChat>
-			icon={<Icons.SearchIcon color={COLORS.blue50} />}
+			icon={<Icons.ChatsIcon color={COLORS.blue50} />}
 			name="Повідомлення"
 			data={data}
 			isLoading={isLoading || isFetching}

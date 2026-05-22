@@ -13,7 +13,7 @@ export function GroupChats() {
 
 	return (
 		<MainContainer<GroupPreviewChat>
-			icon={<Icons.SearchIcon color={COLORS.blue50} />}
+			icon={<Icons.ChatsIcon color={COLORS.blue50} />}
 			name="Групові чати"
 			data={data}
 			isLoading={isLoading || isFetching}

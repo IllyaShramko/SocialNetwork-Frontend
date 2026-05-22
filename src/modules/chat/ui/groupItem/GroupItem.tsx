@@ -63,22 +63,24 @@ export function GroupItem(props: GroupItemProps) {
 					<Text style={styles.lastMessageTime}>20:10</Text>
 				</View>
 
-				{chat.messages[0].text ? (
-					<Text style={styles.lastMessageText}>
-						{chat.messages[0].text}
-					</Text>
-				) : (
-					<View
-						style={{
-							alignItems: "center",
-							flexDirection: "row",
-							gap: 4,
-						}}
-					>
-						<Icons.GalaryIcon />
-						<Text style={styles.lastMessageText}>Фото</Text>
-					</View>
-				)}
+				{chat.messages.length !== 0 ? (
+					chat.messages[0].text ? (
+						<Text style={styles.lastMessageText}>
+							{chat.messages[0].text}
+						</Text>
+					) : (
+						<View
+							style={{
+								alignItems: "center",
+								flexDirection: "row",
+								gap: 4,
+							}}
+						>
+							<Icons.GalaryIcon />
+							<Text style={styles.lastMessageText}>Фото</Text>
+						</View>
+					)
+				) : null}
 				{/* {chat.messages[0].text || <><Icons.GalaryIcon/> Фото</>} */}
 			</View>
 		</TouchableOpacity>

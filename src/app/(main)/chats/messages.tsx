@@ -4,7 +4,7 @@ import { View } from "react-native";
 
 export default function Page() {
 	return (
-		<View style={{ flex: 1, backgroundColor: COLORS.plum50 }}>
+		<View style={{ flex: 1, backgroundColor: COLORS.fog, paddingTop: 6 }}>
 			<DirectChats />
 		</View>
 	);
