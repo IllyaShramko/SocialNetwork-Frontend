@@ -6,7 +6,6 @@ import { ENV } from "@shared/constants/env";
 
 export function Card(props: CardProps) {
 	const { children, user } = props;
-
 	return (
 		<View style={styles.card}>
 			<View style={styles.body}>
