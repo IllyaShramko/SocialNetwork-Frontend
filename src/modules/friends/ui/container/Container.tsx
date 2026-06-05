@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity, View } from "react-native";
 import { ContainerProps } from "./container.types";
 import { styles } from "./container.styles";
 import { useRouter } from "expo-router";
@@ -7,9 +7,10 @@ import { Button } from "@shared/ui/button";
 import { useSelectedProfileContext } from "../../context/friends.context";
 
 export function Container(props: ContainerProps) {
-	const { name, redirectTo, profiles } = props;
+	const { name, redirectTo, profiles, isLoading } = props;
 	const { setStatus } = useSelectedProfileContext();
 	const router = useRouter();
+	console.log("Profiles: ", profiles);
 	async function handleClick(id: number) {
 		setStatus(name);
 		router.push({
@@ -17,7 +18,6 @@ export function Container(props: ContainerProps) {
 			params: { id },
 		});
 	}
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
@@ -39,134 +39,138 @@ export function Container(props: ContainerProps) {
 				)}
 			</View>
 			<View style={styles.body}>
-				{profiles && profiles.length !== 0 ? (
-					redirectTo ? (
-						profiles?.slice(0, 2).map((user) => (
-							<Card
-								key={user.id}
-								user={user}
-								children={
-									name === "Reqs" ? (
-										<View style={styles.btns}>
-											<Button
-												variant="fill"
-												text="Підтвердити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-											<Button
-												variant="outline"
-												text="Видалити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-										</View>
-									) : name === "Recs" ? (
-										<View style={styles.btns}>
-											<Button
-												variant="fill"
-												text="Додати"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-											<Button
-												variant="outline"
-												text="Видалити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-										</View>
-									) : (
-										<View style={styles.btns}>
-											<Button
-												variant="fill"
-												text="Повідомлення"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-											<Button
-												variant="outline"
-												text="Видалити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-										</View>
-									)
-								}
-							/>
-						))
+				{!isLoading ? (
+					profiles && profiles.length !== 0 ? (
+						redirectTo ? (
+							profiles.slice(0, 2).map((user) => (
+								<Card
+									key={user.id}
+									user={user}
+									children={
+										name === "Reqs" ? (
+											<View style={styles.btns}>
+												<Button
+													variant="fill"
+													text="Підтвердити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+												<Button
+													variant="outline"
+													text="Видалити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+											</View>
+										) : name === "Recs" ? (
+											<View style={styles.btns}>
+												<Button
+													variant="fill"
+													text="Додати"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+												<Button
+													variant="outline"
+													text="Видалити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+											</View>
+										) : (
+											<View style={styles.btns}>
+												<Button
+													variant="fill"
+													text="Повідомлення"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+												<Button
+													variant="outline"
+													text="Видалити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+											</View>
+										)
+									}
+								/>
+							))
+						) : (
+							profiles.map((user) => (
+								<Card
+									key={user.id}
+									user={user}
+									children={
+										name === "Reqs" ? (
+											<View style={styles.btns}>
+												<Button
+													variant="fill"
+													text="Підтвердити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+												<Button
+													variant="outline"
+													text="Видалити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+											</View>
+										) : name === "Recs" ? (
+											<View style={styles.btns}>
+												<Button
+													variant="fill"
+													text="Додати"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+												<Button
+													variant="outline"
+													text="Видалити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+											</View>
+										) : (
+											<View style={styles.btns}>
+												<Button
+													variant="fill"
+													text="Повідомлення"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+												<Button
+													variant="outline"
+													text="Видалити"
+													onPress={() =>
+														handleClick(user.id)
+													}
+												/>
+											</View>
+										)
+									}
+								/>
+							))
+						)
 					) : (
-						profiles?.map((user) => (
-							<Card
-								key={user.id}
-								user={user}
-								children={
-									name === "Reqs" ? (
-										<View style={styles.btns}>
-											<Button
-												variant="fill"
-												text="Підтвердити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-											<Button
-												variant="outline"
-												text="Видалити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-										</View>
-									) : name === "Recs" ? (
-										<View style={styles.btns}>
-											<Button
-												variant="fill"
-												text="Додати"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-											<Button
-												variant="outline"
-												text="Видалити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-										</View>
-									) : (
-										<View style={styles.btns}>
-											<Button
-												variant="fill"
-												text="Повідомлення"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-											<Button
-												variant="outline"
-												text="Видалити"
-												onPress={() =>
-													handleClick(user.id)
-												}
-											/>
-										</View>
-									)
-								}
-							/>
-						))
+						<Text style={styles.placeholderText}>
+							Тут поки що нічого немає...
+						</Text>
 					)
 				) : (
-					<Text style={styles.placeholderText}>
-						Тут поки що нічого немає...
-					</Text>
+					<ActivityIndicator />
 				)}
 			</View>
 		</View>

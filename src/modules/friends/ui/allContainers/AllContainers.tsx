@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { RefreshControl, ScrollView } from "react-native";
 import { Container } from "../container";
 import {
@@ -11,9 +11,21 @@ import { useUserContext } from "@modules/auth/context/user.context";
 export function AllContainer() {
 	const { user } = useUserContext();
 	const [refreshing, setRefreshing] = useState(false);
-	const { data: reqsData, refetch: refetchReqs } = useGetRequestsQuery();
-	const { data: recsData, refetch: refetchRecs } = useGetForYouRecsQuery();
-	const { data: friendsData, refetch: refetchFriends } = useGetFriendsQuery();
+	const {
+		data: reqsData,
+		isLoading: isLoadingReqs,
+		refetch: refetchReqs,
+	} = useGetRequestsQuery();
+	const {
+		data: recsData,
+		isLoading: isLoadingRecs,
+		refetch: refetchRecs,
+	} = useGetForYouRecsQuery();
+	const {
+		data: friendsData,
+		isLoading: isLoadingFriends,
+		refetch: refetchFriends,
+	} = useGetFriendsQuery();
 
 	const handleRefresh = useCallback(async () => {
 		setRefreshing(true);
@@ -29,6 +41,13 @@ export function AllContainer() {
 			setRefreshing(false);
 		}
 	}, [refetchFriends, refetchRecs, refetchReqs]);
+	useEffect(() => {
+		console.log(isLoadingFriends, isLoadingRecs, isLoadingReqs);
+	}, [isLoadingFriends, isLoadingRecs, isLoadingReqs]);
+
+	console.log("Reqs: ", reqsData);
+	console.log("Recs: ", recsData);
+	console.log("Friends: ", friendsData);
 
 	return (
 		<ScrollView
@@ -42,13 +61,15 @@ export function AllContainer() {
 		>
 			<Container
 				name="Reqs"
-				profiles={reqsData?.map((req) => req.fromUser)}
+				profiles={reqsData ? reqsData.map((req) => req.fromUser) : []}
 				redirectTo="/friends/requests"
+				isLoading={isLoadingReqs}
 			/>
 			<Container
 				name="Recs"
 				profiles={recsData}
 				redirectTo="/friends/recs"
+				isLoading={isLoadingRecs}
 			/>
 			<Container
 				name="AllF"
@@ -58,6 +79,7 @@ export function AllContainer() {
 						: friend.fromUser,
 				)}
 				redirectTo="/friends/all"
+				isLoading={isLoadingFriends}
 			/>
 		</ScrollView>
 	);

@@ -15,6 +15,8 @@ export function HomeHeader() {
 	const { setToken, setUser } = useUserContext();
 	const pathname = usePathname();
 	const [visibleModal, SetVisibleModal] = useState<boolean>(false);
+
+	
 	const router = useRouter();
 	return (
 		<SafeAreaView edges={["top"]} style={{ backgroundColor: COLORS.white }}>
