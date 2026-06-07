@@ -10,13 +10,13 @@ import { Button } from "@shared/ui/button";
 import { Icons } from "@shared/ui/icons";
 import { useState } from "react";
 import { PostCreateModal } from "../../@x/ui";
-
+import { CreateChatModal } from "@modules/chat/ui/createChatModal";
 export function HomeHeader() {
 	const { setToken, setUser } = useUserContext();
 	const pathname = usePathname();
 	const [visibleModal, SetVisibleModal] = useState<boolean>(false);
+	const [visibleCreateChatModal, setVisibleCreateChatModal] = useState(false);
 
-	
 	const router = useRouter();
 	return (
 		<SafeAreaView edges={["top"]} style={{ backgroundColor: COLORS.white }}>
@@ -29,7 +29,11 @@ export function HomeHeader() {
 							iconLeft={<Icons.PlusIcon />}
 							onPress={() => {
 								SetVisibleModal(true);
-							}}
+								if (pathname.includes("/chats")) {
+									setVisibleCreateChatModal(true);
+								}
+								setVisibleCreateChatModal(true);
+							}}	
 						/>
 					)}
 
@@ -64,6 +68,12 @@ export function HomeHeader() {
 				visible={visibleModal}
 				onClose={() => {
 					SetVisibleModal(false)
+				}}
+			/>
+			<CreateChatModal
+				visible={visibleCreateChatModal}
+				onClose={() => {
+					setVisibleCreateChatModal(false);
 				}}
 			/>
 		</SafeAreaView>
